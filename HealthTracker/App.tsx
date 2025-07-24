@@ -1,10 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import {
-  StyleSheet,
   View,
   Text,
-  Button,
   Modal,
   TouchableOpacity,
 } from "react-native";
@@ -14,14 +12,22 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import IconButton from "./components/IconButton";
 import BloodPressureForm from "./feature/BloodPressureForm";
 import { BloodPressureData } from "./feature/BloodPressureForm";
+import CameraModal from "./components/CameraModal";
 
 export default function App() {
   const [isModalVisible, setModalVisible] = useState(false);
+  const [isCameraVisible, setCameraVisible] = useState(false);
   const [lastRecord, setLastRecord] = useState<BloodPressureData | null>(null);
+  const [capturedPhoto, setCapturedPhoto] = useState<string | null>(null);
 
   const handleFormSubmit = (data: BloodPressureData) => {
     setLastRecord(data);
     setModalVisible(false);
+  };
+
+  const handlePhotoTaken = (photoUri: string) => {
+    setCapturedPhoto(photoUri);
+    console.log('Photo captured:', photoUri);
   };
 
   return (
@@ -35,17 +41,25 @@ export default function App() {
           </Text>
         </View>
       )}
-      <IconButton
-        onPress={() => setModalVisible(true)}
-        text="Open From"
-        icon={
-          <MaterialCommunityIcons
-            name="square-edit-outline"
-            size={22}
-            color="white"
-          />
-        }
-      />
+      <View style={styles.buttonContainer}>
+        <IconButton
+          onPress={() => setModalVisible(true)}
+          text="Form"
+          icon={
+            <MaterialCommunityIcons
+              name="square-edit-outline"
+              size={22}
+              color="white"
+            />
+          }
+        />
+        <IconButton
+          onPress={() => setCameraVisible(true)}
+          text="Camera"
+          icon={<Feather name="camera" size={22} color="white" />}
+        />
+      </View>
+
       <Modal
         visible={isModalVisible}
         transparent={true}
@@ -67,6 +81,13 @@ export default function App() {
           </View>
         </View>
       </Modal>
+
+      <CameraModal
+        visible={isCameraVisible}
+        onClose={() => setCameraVisible(false)}
+        onPhotoTaken={handlePhotoTaken}
+      />
+      
       <StatusBar style="auto" />
     </View>
   );
