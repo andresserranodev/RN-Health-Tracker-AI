@@ -1,22 +1,25 @@
+import { validationMessages } from "../../constants/validationMessages";
 import * as yup from "yup";
 
 export const validationSchema = yup.object().shape({
   sys: yup
     .number()
-    .typeError("The value must be a number")
-    .required("Systolic pressure is required")
-    .positive("The value must be positive"),
+    .typeError(validationMessages.common.mustBeNumber)
+    .required(validationMessages.sys.required)
+    .positive(validationMessages.common.mustBePositive)
+    .integer(validationMessages.common.mustBeInteger),
 
   dia: yup
     .number()
-    .typeError("The value must be a number")
-    .required("Diastolic pressure is required")
-    .positive("The value must be positive"),
+    .typeError(validationMessages.common.mustBeNumber)
+    .required(validationMessages.dia.required)
+    .positive(validationMessages.common.mustBePositive)
+    .integer(validationMessages.common.mustBeInteger),
 
   ppm: yup
     .number()
-    .typeError("The value must be a number")
-    .required("Pulse rate is required")
-    .positive("The value must be positive")
-    .integer("The value must be an integer"),
+    .typeError(validationMessages.common.mustBeNumber)
+    .required(validationMessages.ppm.required)
+    .positive(validationMessages.common.mustBePositive)
+    .integer(validationMessages.common.mustBeInteger),
 });
