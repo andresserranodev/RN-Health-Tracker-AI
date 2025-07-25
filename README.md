@@ -21,14 +21,48 @@ This application was developed with two primary goals in mind:
 
 ## ✨ Key Features of the Board
 
-*   **Custom Views:** Different ways to view your data for clearer analysis.
-*   **Pre-defined Templates:** Easily create new health entries.
-*   **Integration and Flexibility:** Connect with other tools if needed and adapt the board to your specific needs.
+- **Custom Views:** Different ways to view your data for clearer analysis.
+- **Pre-defined Templates:** Easily create new health entries.
+- **Integration and Flexibility:** Connect with other tools if needed and adapt the board to your specific needs.
 
-## 🛠️ [TBD] How to Use 
+## 🛠️ How to run it
 
-## 📚 [WIP] Sources: 
+### Prerequisites
 
+- Node.js (LTS version)
+- npm or yarn
+- Expo Go app on your mobile device
+
+### Installation & Setup
+
+1.  **Clone the repository:**
+
+2.  **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Set up environment variables:**
+
+    This project uses a `.env` file to manage environment variables like API keys. To get set up, copy the example file:
+
+    ```bash
+    cp .env.example .env
+    ```
+
+    Next, open the newly created `.env` file and add your personal Google Gemini API key in the as a EXPO_PUBLIC_GEMINI_API_KEY.
+
+    Your `.env` file is already listed in `.gitignore` to ensure your keys are never committed to the repository.
+
+4.  **Run the application:**
+    ```bash
+    npx expo start
+    ```
+
+---
+
+## 📚 [WIP] Sources:
 
 ## 🤝 Contributions
 

@@ -71,9 +71,12 @@ export default function CameraModal({
   const takePicture = async () => {
     if (cameraRef.current) {
       try {
-        const photo = await cameraRef.current.takePictureAsync({
+        const cameraOptions = {
           base64: true,
-        });
+          shutterSound: false,
+        };
+
+        const photo = await cameraRef.current.takePictureAsync(cameraOptions);
 
         if (photo.uri && photo.base64) {
           setCapturedPhoto({
@@ -125,7 +128,7 @@ export default function CameraModal({
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveButton} onPress={savePhoto}>
                 <Feather name="check" size={24} color="white" />
-                <Text style={styles.buttonText}>Save</Text>
+                <Text style={styles.buttonText}>Analyze</Text>
               </TouchableOpacity>
             </View>
             <TouchableOpacity
