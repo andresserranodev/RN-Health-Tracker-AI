@@ -1,34 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { validationSchema } from "./validationschema";
 import { styles } from "./styles";
+import { BloodPressureFormValues } from "./types";
 
 import * as yup from "yup";
 
-export type BloodPressureData = {
-  sys: number;
-  dia: number;
-  ppm: number;
-};
-
 type BloodPressureFormProps = {
-  onSubmit: (data: BloodPressureData) => void;
+  onSubmit: (data: BloodPressureFormValues) => void;
   onClose: () => void;
+  initialValues?: BloodPressureFormValues;
 };
 
-export default function RegistroForm({
+export default function BloodPressureForm({
   onSubmit,
   onClose,
+  initialValues,
 }: BloodPressureFormProps) {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<BloodPressureData>({
+    reset,
+  } = useForm<BloodPressureFormValues>({
+    defaultValues: initialValues || {
+      sys: undefined,
+      dia: undefined,
+      ppm: undefined,
+    },
     resolver: yupResolver(validationSchema),
   });
+  useEffect(() => {
+    if (initialValues) {
+      reset(initialValues);
+    }
+  }, [initialValues, reset]);
 
   return (
     <View style={styles.modalContent}>

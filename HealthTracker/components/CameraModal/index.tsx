@@ -125,7 +125,7 @@ export default function CameraModal({
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveButton} onPress={savePhoto}>
                 <Feather name="check" size={24} color="white" />
-                <Text style={styles.buttonText}>Save</Text>
+                <Text style={styles.buttonText}>Analyze</Text>
               </TouchableOpacity>
             </View>
             <TouchableOpacity
