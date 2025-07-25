@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { validationSchema } from "./validationschema";
 import { styles } from "./styles";
 import { BloodPressureFormValues } from "./types";
+import LabeledInput from "../../components/LabeledInput";
 
 import * as yup from "yup";
 
@@ -46,19 +47,14 @@ export default function BloodPressureForm({
         control={control}
         name="sys"
         render={({ field: { onChange, onBlur, value } }) => (
-          <>
-            <TextInput
-              style={styles.input}
-              placeholder="Systolic (SYS)"
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value?.toString()}
-              keyboardType="numeric"
-            />
-            {errors.sys && (
-              <Text style={styles.errorText}>{errors.sys.message}</Text>
-            )}
-          </>
+          <LabeledInput
+            label="Systolic (SYS)"
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value?.toString()}
+            keyboardType="numeric"
+            error={errors.sys}
+          />
         )}
       />
 
@@ -66,19 +62,14 @@ export default function BloodPressureForm({
         control={control}
         name="dia"
         render={({ field: { onChange, onBlur, value } }) => (
-          <>
-            <TextInput
-              style={styles.input}
-              placeholder="Diastolic (DIA)"
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value?.toString()}
-              keyboardType="numeric"
-            />
-            {errors.dia && (
-              <Text style={styles.errorText}>{errors.dia.message}</Text>
-            )}
-          </>
+          <LabeledInput
+            label="Diastolic (DIA)"
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value?.toString()}
+            keyboardType="numeric"
+            error={errors.dia}
+          />
         )}
       />
 
@@ -86,19 +77,14 @@ export default function BloodPressureForm({
         control={control}
         name="ppm"
         render={({ field: { onChange, onBlur, value } }) => (
-          <>
-            <TextInput
-              style={styles.input}
-              placeholder="Pulsations (PPM)"
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value?.toString()}
-              keyboardType="numeric"
-            />
-            {errors.ppm && (
-              <Text style={styles.errorText}>{errors.ppm.message}</Text>
-            )}
-          </>
+          <LabeledInput
+            label="Pulse (PPM)"
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value?.toString()}
+            keyboardType="numeric"
+            error={errors.ppm}
+          />
         )}
       />
 
