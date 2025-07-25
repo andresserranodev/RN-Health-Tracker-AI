@@ -37,11 +37,6 @@ This application was developed with two primary goals in mind:
 
 1.  **Clone the repository:**
 
-    ```bash
-    git clone [URL_DE_TU_REPOSITORIO]
-    cd [NOMBRE_DE_TU_CARPETA]
-    ```
-
 2.  **Install dependencies:**
 
     ```bash
@@ -56,7 +51,9 @@ This application was developed with two primary goals in mind:
     cp .env.example .env
     ```
 
-    Next, open the newly created `.env` file and add your personal Google Gemini API key. Your `.env` file is already listed in `.gitignore` to ensure your keys are never committed to the repository.
+    Next, open the newly created `.env` file and add your personal Google Gemini API key in the as a EXPO_PUBLIC_GEMINI_API_KEY.
+
+    Your `.env` file is already listed in `.gitignore` to ensure your keys are never committed to the repository.
 
 4.  **Run the application:**
     ```bash
