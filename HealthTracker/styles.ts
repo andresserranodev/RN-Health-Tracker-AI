@@ -7,6 +7,11 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    gap: 10,
+  },
   modalContainer: {
     flex: 1,
     justifyContent: "center",
