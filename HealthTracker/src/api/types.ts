@@ -7,3 +7,23 @@ export interface GeminiResponse {
     };
   }[];
 }
+
+interface TextPart {
+  text: string;
+}
+
+interface InlineDataPart {
+  inline_data: {
+    mime_type: string;
+    data: string;
+  };
+}
+
+export interface GeminiImagePressureBloodRequest {
+  contents: {
+    parts: (TextPart | InlineDataPart)[];
+  }[];
+  generationConfig?: {
+    responseModalities: string[];
+  };
+}

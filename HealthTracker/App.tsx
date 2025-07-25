@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { View, Text, Modal, TouchableOpacity, Alert } from "react-native";
-import LoadingOverlay from "./components/LoadingOverlay";
+import LoadingModal from "./components/LoadingModal";
 import { styles } from "./styles";
 import { Feather } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -108,7 +108,7 @@ export default function App() {
       />
 
       <StatusBar style="auto" />
-      {isLoading && <LoadingOverlay />}
+      <LoadingModal visible={isLoading} />
     </View>
   );
 }

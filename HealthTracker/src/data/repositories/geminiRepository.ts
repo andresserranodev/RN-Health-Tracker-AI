@@ -1,13 +1,17 @@
 import geminiApiClient from "../../api/geminiApiClient";
 import { EXTRACT_BLOOD_PRESSURE_PROMPT } from "../../constants/geminiPrompts";
-import { GeminiResponse } from "../../api/types";
+import { MIME_TYPE, RESPONSE_MODALITIES } from "../../constants/requestBody";
+import {
+  GeminiResponse,
+  GeminiImagePressureBloodRequest,
+} from "../../api/types";
 import { BloodPressureReading } from "../../domain/models/bloodPressureReading";
 
 export const geminiRepository = {
   getReadingsFromImage: async (
     imageBase64: string
   ): Promise<BloodPressureReading> => {
-    const requestBody = {
+    const requestBody: GeminiImagePressureBloodRequest = {
       contents: [
         {
           parts: [
@@ -16,7 +20,7 @@ export const geminiRepository = {
             },
             {
               inline_data: {
-                mime_type: "image/jpeg",
+                mime_type: MIME_TYPE,
                 data: imageBase64,
               },
             },
@@ -24,7 +28,7 @@ export const geminiRepository = {
         },
       ],
       generationConfig: {
-        responseModalities: ["TEXT", "IMAGE"],
+        responseModalities: RESPONSE_MODALITIES,
       },
     };
 
