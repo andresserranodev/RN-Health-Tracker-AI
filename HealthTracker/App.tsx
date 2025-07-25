@@ -13,7 +13,6 @@ export default function App() {
   const [isModalVisible, setModalVisible] = useState(false);
   const [isCameraVisible, setCameraVisible] = useState(false);
   const [lastRecord, setLastRecord] = useState<BloodPressureData | null>(null);
-  const [capturedPhoto, setCapturedPhoto] = useState<string | null>(null);
 
   const handleFormSubmit = (data: BloodPressureData) => {
     setLastRecord(data);
@@ -21,7 +20,6 @@ export default function App() {
   };
 
   const handlePhotoTaken = (base64: string) => {
-    setCapturedPhoto(base64);
     console.log("Photo captured:", base64);
   };
 
@@ -38,6 +36,11 @@ export default function App() {
       )}
       <View style={styles.buttonContainer}>
         <IconButton
+          onPress={() => setCameraVisible(true)}
+          text="Camera"
+          icon={<Feather name="camera" size={22} color="white" />}
+        />
+        <IconButton
           onPress={() => setModalVisible(true)}
           text="Form"
           icon={
@@ -47,11 +50,6 @@ export default function App() {
               color="white"
             />
           }
-        />
-        <IconButton
-          onPress={() => setCameraVisible(true)}
-          text="Camera"
-          icon={<Feather name="camera" size={22} color="white" />}
         />
       </View>
 
