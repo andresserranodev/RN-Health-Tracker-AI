@@ -1,11 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Modal,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, Modal, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { Feather } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -25,9 +20,9 @@ export default function App() {
     setModalVisible(false);
   };
 
-  const handlePhotoTaken = (photoUri: string) => {
-    setCapturedPhoto(photoUri);
-    console.log('Photo captured:', photoUri);
+  const handlePhotoTaken = (base64: string) => {
+    setCapturedPhoto(base64);
+    console.log("Photo captured:", base64);
   };
 
   return (
@@ -87,7 +82,7 @@ export default function App() {
         onClose={() => setCameraVisible(false)}
         onPhotoTaken={handlePhotoTaken}
       />
-      
+
       <StatusBar style="auto" />
     </View>
   );
