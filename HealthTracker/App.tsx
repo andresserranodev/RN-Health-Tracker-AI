@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { View, Text, Modal, TouchableOpacity, Alert } from "react-native";
+import LoadingOverlay from "./components/LoadingOverlay";
 import { styles } from "./styles";
 import { Feather } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -34,6 +35,7 @@ export default function App() {
 
   const handlePhotoTaken = async (base64: string) => {
     console.log(`prosessing image...`);
+    setIsLoading(true);
     try {
       const readings = await extractReadingsFromImageUseCase(base64);
       setPrefilledData(toFormValues(readings));
@@ -106,6 +108,7 @@ export default function App() {
       />
 
       <StatusBar style="auto" />
+      {isLoading && <LoadingOverlay />}
     </View>
   );
 }

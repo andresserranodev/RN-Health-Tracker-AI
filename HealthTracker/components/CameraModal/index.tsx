@@ -71,9 +71,12 @@ export default function CameraModal({
   const takePicture = async () => {
     if (cameraRef.current) {
       try {
-        const photo = await cameraRef.current.takePictureAsync({
+        const cameraOptions = {
           base64: true,
-        });
+          shutterSound: false,
+        };
+
+        const photo = await cameraRef.current.takePictureAsync(cameraOptions);
 
         if (photo.uri && photo.base64) {
           setCapturedPhoto({
