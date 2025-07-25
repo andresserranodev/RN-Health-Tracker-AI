@@ -17,6 +17,11 @@ interface CameraModalProps {
   onPhotoTaken?: (base64: string) => void;
 }
 
+interface CapturedPhoto {
+  uri: string;
+  base64: string;
+}
+
 export default function CameraModal({
   visible,
   onClose,
@@ -24,7 +29,10 @@ export default function CameraModal({
 }: CameraModalProps) {
   const [facing, setFacing] = useState<CameraType>("back");
   const [permission, requestPermission] = useCameraPermissions();
-  const [capturedPhoto, setCapturedPhoto] = useState<string | null>(null);
+  const [capturedPhoto, setCapturedPhoto] = useState<CapturedPhoto | null>(
+    null
+  );
+
   const cameraRef = useRef<CameraView>(null);
 
   if (!permission) {
@@ -67,8 +75,11 @@ export default function CameraModal({
           base64: true,
         });
 
-        if (photo.base64) {
-          setCapturedPhoto(photo.base64);
+        if (photo.uri && photo.base64) {
+          setCapturedPhoto({
+            uri: photo.uri,
+            base64: photo.base64,
+          });
         }
       } catch (error) {
         Alert.alert("Error", "Failed to take picture");
@@ -79,7 +90,7 @@ export default function CameraModal({
 
   const savePhoto = () => {
     if (capturedPhoto && onPhotoTaken) {
-      onPhotoTaken(capturedPhoto);
+      onPhotoTaken(capturedPhoto.base64);
     }
     setCapturedPhoto(null);
     onClose();
@@ -101,7 +112,7 @@ export default function CameraModal({
           // Photo preview screen
           <View style={styles.previewContainer}>
             <Image
-              source={{ uri: capturedPhoto }}
+              source={{ uri: capturedPhoto.uri }}
               style={styles.previewImage}
             />
             <View style={styles.previewControls}>
