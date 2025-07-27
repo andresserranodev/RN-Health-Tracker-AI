@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { View, Text, Button } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { validationSchema } from "./validationschema";
@@ -42,7 +42,6 @@ export default function BloodPressureForm({
   return (
     <View style={styles.modalContent}>
       <Text style={styles.formTitle}>Add new register</Text>
-
       <Controller
         control={control}
         name="sys"
