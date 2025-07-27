@@ -61,9 +61,7 @@ export default function App() {
       <Text style={styles.title}>Add new register</Text>
       <View style={styles.buttonContainer}>
         <IconButton
-          onPress={() => {
-            openCamera;
-          }}
+          onPress={() => openCamera()}
           text="Camera"
           icon={<Feather name="camera" size={22} color="white" />}
         />

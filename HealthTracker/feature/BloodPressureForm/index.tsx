@@ -88,6 +88,7 @@ export default function BloodPressureForm({
       />
 
       <View style={styles.buttonGroup}>
+        <Button title="Close" onPress={onClose} />
         <Button title="Save" onPress={handleSubmit(onSubmit)} />
       </View>
     </View>
