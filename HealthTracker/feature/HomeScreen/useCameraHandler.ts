@@ -35,7 +35,7 @@ export const useCameraHandler = (
       closeCamera();
       try {
         const readings = await extractReadingsFromImageUseCase(base64);
-        onDataExtracted(toFormValues(readings)); // Llama al callback con los datos
+        onDataExtracted(toFormValues(readings));
       } catch (error) {
         console.error(error);
         Alert.alert("Error", "Could not analyze the image.");

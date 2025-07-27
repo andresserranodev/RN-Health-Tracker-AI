@@ -5,7 +5,6 @@ import {
   Text,
   Modal,
   TouchableOpacity,
-  Alert,
   SafeAreaView,
 } from "react-native";
 import LoadingModal from "../../components/LoadingModal";
@@ -17,8 +16,6 @@ import IconButton from "../../components/IconButton";
 import BloodPressureForm from "../../feature/BloodPressureForm";
 import { BloodPressureFormValues } from "../../feature/BloodPressureForm/types";
 import CameraModal from "../../components/CameraModal";
-import { extractReadingsFromImageUseCase } from "../../src/domain/usecase/extractReadingsFromImageUseCase";
-import { toFormValues } from "../../feature/BloodPressureForm/bloodPressureMapper";
 
 // Hooks
 import { useRecordForm } from "./useRecordForm";
