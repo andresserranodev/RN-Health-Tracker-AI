@@ -25,40 +25,25 @@ import { useRecordForm } from "./useRecordForm";
 import { useCameraHandler } from "./useCameraHandler";
 
 export default function App() {
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [isCameraVisible, setCameraVisible] = useState(false);
   const [lastRecord, setLastRecord] = useState<BloodPressureFormValues | null>(
     null
   );
-  const [isLoading, setIsLoading] = useState(false);
-  const [prefilledData, setPrefilledData] = useState<
-    BloodPressureFormValues | undefined
-  >(undefined);
-
-  const handleOpenManualForm = () => {
-    setPrefilledData(undefined);
-    setModalVisible(true);
-  };
-
-  const handleFormSubmit = (data: BloodPressureFormValues) => {
-    setLastRecord(data);
-    setModalVisible(false);
-  };
-
-  const handlePhotoTaken = async (base64: string) => {
-    console.log(`prosessing image...`);
-    setIsLoading(true);
-    try {
-      const readings = await extractReadingsFromImageUseCase(base64);
-      setPrefilledData(toFormValues(readings));
-      setModalVisible(true);
-    } catch (error) {
-      console.error(error);
-      Alert.alert("Error", "Could not analyze the image.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // Custom hooks for form handling
+  const {
+    isModalVisible,
+    prefilledData,
+    openForm,
+    closeForm,
+    handleFormSubmit,
+  } = useRecordForm(setLastRecord);
+  // Custom hook for camera handling
+  const {
+    isCameraVisible,
+    isLoading,
+    openCamera,
+    closeCamera,
+    handlePhotoTaken,
+  } = useCameraHandler(openForm);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -79,12 +64,14 @@ export default function App() {
       <Text style={styles.title}>Add new register</Text>
       <View style={styles.buttonContainer}>
         <IconButton
-          onPress={() => setCameraVisible(true)}
+          onPress={() => {
+            openCamera;
+          }}
           text="Camera"
           icon={<Feather name="camera" size={22} color="white" />}
         />
         <IconButton
-          onPress={() => handleOpenManualForm()}
+          onPress={() => openForm()}
           text="Form"
           icon={
             <MaterialCommunityIcons
@@ -100,27 +87,24 @@ export default function App() {
         visible={isModalVisible}
         transparent={true}
         animationType="slide"
-        onRequestClose={() => setModalVisible(false)}
+        onRequestClose={closeForm}
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <TouchableOpacity
-              style={styles.closeButton}
-              onPress={() => setModalVisible(false)}
-            >
+            <TouchableOpacity style={styles.closeButton} onPress={closeForm}>
               <Feather name="x" size={24} color="black" />
             </TouchableOpacity>
             <BloodPressureForm
               initialValues={prefilledData}
               onSubmit={handleFormSubmit}
-              onClose={() => setModalVisible(false)}
+              onClose={closeForm}
             />
           </View>
         </View>
       </Modal>
       <CameraModal
         visible={isCameraVisible}
-        onClose={() => setCameraVisible(false)}
+        onClose={closeCamera}
         onPhotoTaken={handlePhotoTaken}
       />
       <Text style={styles.title}>History</Text>
