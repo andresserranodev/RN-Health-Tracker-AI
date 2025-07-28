@@ -7,9 +7,9 @@ export const toFormValues = (
   if (!reading) {
     return null;
   }
-  const sysNum = parseInt(reading.systolic ?? "", 10);
-  const diaNum = parseInt(reading.diastolic ?? "", 10);
-  const ppmNum = parseInt(reading.pulse ?? "", 10);
+  const sysNum = Number(reading.systolic);
+  const diaNum = Number(reading.diastolic);
+  const ppmNum = Number(reading.pulse)
 
   if (isNaN(sysNum) || isNaN(diaNum) || isNaN(ppmNum)) {
     console.warn("Invalid data found while mapping to form values:", reading);

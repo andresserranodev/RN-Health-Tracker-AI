@@ -4,9 +4,13 @@ import { format } from 'date-fns';
 
 export const toRecordModel = (formData: BloodPressureReading): BloodPressureRecordModel => {
 
-  const sysNum = parseInt(formData.systolic ?? "", 10);
-  const diaNum = parseInt(formData.diastolic ?? "", 10);
-  const ppmNum = parseInt(formData.pulse ?? "", 10);
+    const sysNum = Number(formData.systolic);
+    const diaNum = Number(formData.diastolic);
+    const ppmNum = Number(formData.pulse);
+  
+    if (isNaN(sysNum) || isNaN(diaNum) || isNaN(ppmNum)) {
+      throw new Error("Invalid numeric value provided. Cannot create record.");
+    }
   return {
     sys: sysNum,
     dia: diaNum,
