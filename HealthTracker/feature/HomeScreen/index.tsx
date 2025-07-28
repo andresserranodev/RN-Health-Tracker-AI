@@ -6,7 +6,6 @@ import {
   Modal,
   TouchableOpacity,
   SafeAreaView,
-  Alert,
 } from "react-native";
 import LoadingModal from "../../components/LoadingModal";
 import MetricRow from "../../components/MetricRow";
