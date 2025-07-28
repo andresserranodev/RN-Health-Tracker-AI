@@ -4,7 +4,7 @@ import { styles } from "./styles";
 
 type MetricRowProps = {
   label: string;
-  value: number;
+  value: string;
 };
 
 const MetricRow = ({ label, value }: MetricRowProps) => {

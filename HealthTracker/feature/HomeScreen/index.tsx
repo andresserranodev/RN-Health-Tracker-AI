@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -14,17 +14,19 @@ import { Feather } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import IconButton from "../../components/IconButton";
 import BloodPressureForm from "../../feature/BloodPressureForm";
-import { BloodPressureFormValues } from "../../feature/BloodPressureForm/types";
 import CameraModal from "../../components/CameraModal";
+import HistoryList from "../../components/HistoryList";
 
 // Hooks
 import { useRecordForm } from "./useRecordForm";
 import { useCameraHandler } from "./useCameraHandler";
+import { useBloodPressureData } from './useBloodPressureData';
+
 
 export default function App() {
-  const [lastRecord, setLastRecord] = useState<BloodPressureFormValues | null>(
-    null
-  );
+
+  const { readings, lastReading, addReading } = useBloodPressureData();
+
   // Custom hooks for form handling
   const {
     isModalVisible,
@@ -32,7 +34,7 @@ export default function App() {
     openForm,
     closeForm,
     handleFormSubmit,
-  } = useRecordForm(setLastRecord);
+  } = useRecordForm(addReading);
   // Custom hook for camera handling
   const {
     isCameraVisible,
@@ -42,14 +44,17 @@ export default function App() {
     handlePhotoTaken,
   } = useCameraHandler(openForm);
 
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Latest Entry</Text>
-      {lastRecord ? (
+
+      {lastReading ? (
         <View style={styles.lastRecordContainer}>
-          <MetricRow label="Systolic (SYS):" value={lastRecord.sys} />
-          <MetricRow label="Diastolic (DIA):" value={lastRecord.dia} />
-          <MetricRow label="Pulse (PPM):" value={lastRecord.ppm} />
+          <MetricRow label="Created at:" value={lastReading.createdAt} />
+          <MetricRow label="Systolic (SYS):" value={lastReading.systolic} />
+          <MetricRow label="Diastolic (DIA):" value={lastReading.diastolic} />
+          <MetricRow label="Pulse (PPM):" value={lastReading.pulse} />
         </View>
       ) : (
         <View style={styles.placeholderContainer}>
@@ -103,11 +108,7 @@ export default function App() {
         onPhotoTaken={handlePhotoTaken}
       />
       <Text style={styles.title}>History</Text>
-      <View style={styles.placeholderContainer}>
-        <Text style={styles.placeholderText}>
-          Comming soon! This section will display your historical data.
-        </Text>
-      </View>
+      <HistoryList readings={readings} />
       <StatusBar style="auto" />
       <LoadingModal visible={isLoading} />
     </SafeAreaView>
