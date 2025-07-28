@@ -6,6 +6,7 @@ import {
   Modal,
   TouchableOpacity,
   SafeAreaView,
+  Alert,
 } from "react-native";
 import LoadingModal from "../../components/LoadingModal";
 import MetricRow from "../../components/MetricRow";
@@ -20,6 +21,7 @@ import CameraModal from "../../components/CameraModal";
 // Hooks
 import { useRecordForm } from "./useRecordForm";
 import { useCameraHandler } from "./useCameraHandler";
+import { usePDFExport } from "./usePDFExport";
 
 export default function App() {
   const [lastRecord, setLastRecord] = useState<BloodPressureFormValues | null>(
@@ -41,6 +43,8 @@ export default function App() {
     closeCamera,
     handlePhotoTaken,
   } = useCameraHandler(openForm);
+
+  const { exportRecord } = usePDFExport();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -103,6 +107,23 @@ export default function App() {
         onPhotoTaken={handlePhotoTaken}
       />
       <Text style={styles.title}>History</Text>
+      <View style={styles.exportButtonContainer}>
+        {lastRecord && (
+          <View style={styles.exportButtonContainer}>
+            <IconButton
+              onPress={() => exportRecord(lastRecord)}
+              text="Export Records as PDF"
+              icon={
+                <MaterialCommunityIcons
+                  name="file-pdf-box"
+                  size={22}
+                  color="white"
+                />
+              }
+            />
+          </View>
+        )}
+      </View>
       <View style={styles.placeholderContainer}>
         <Text style={styles.placeholderText}>
           Comming soon! This section will display your historical data.
