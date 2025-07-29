@@ -1,8 +1,8 @@
 import { useState, useCallback } from "react";
 import { Alert } from "react-native";
-import { extractReadingsFromImageUseCase } from "../../src/domain/usecase/extractReadingsFromImageUseCase";
-import { toFormValues } from "../BloodPressureForm/bloodPressureMapper";
-import { BloodPressureFormValues } from "../BloodPressureForm/types";
+import { extractReadingsFromImageUseCase } from "../../../domain/usecase/extractReadingsFromImageUseCase";
+import { toFormValues } from "../../BloodPressureForm/bloodPressureMapper";
+import { BloodPressureFormValues } from "../../BloodPressureForm/types";
 /**
  * @description Custom hook to manage the state and logic for the camera feature.
  * It handles the camera modal's visibility, the loading state during image processing,

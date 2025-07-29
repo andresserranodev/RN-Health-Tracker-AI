@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { styles } from './styles';
-import { BloodPressureReading } from '../../src/domain/models/bloodPressureReading';
+import { BloodPressureReading } from '../../domain/models/bloodPressureReading';
 import MetricRow from "../../components/MetricRow";
 
 type HistoryListProps = {

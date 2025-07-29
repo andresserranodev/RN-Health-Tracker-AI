@@ -1,4 +1,4 @@
-import { BloodPressureReading } from "../../src/domain/models/bloodPressureReading";
+import { BloodPressureReading } from "../../domain/models/bloodPressureReading";
 import { BloodPressureFormValues } from "./types";
 
 export const toFormValues = (

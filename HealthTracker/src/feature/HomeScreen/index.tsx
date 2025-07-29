@@ -13,14 +13,14 @@ import { styles } from "./styles";
 import { Feather } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import IconButton from "../../components/IconButton";
-import BloodPressureForm from "../../feature/BloodPressureForm";
+import BloodPressureForm from "../BloodPressureForm";
 import CameraModal from "../../components/CameraModal";
 import HistoryList from "../../components/HistoryList";
 
 // Hooks
-import { useRecordForm } from "./useRecordForm";
-import { useCameraHandler } from "./useCameraHandler";
-import { useBloodPressureData } from './useBloodPressureData';
+import { useRecordForm } from "./hooks/useRecordForm";
+import { useCameraHandler } from "./hooks/useCameraHandler";
+import { useBloodPressureData } from './hooks/useBloodPressureData';
 
 
 export default function App() {
