@@ -91,4 +91,9 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     lineHeight: 24,
   },
+  exportButtonContainer: {
+    width: "90%",
+    marginTop: 10,
+    alignItems: "center",
+  },
 });

@@ -21,9 +21,15 @@ import HistoryList from "../../components/HistoryList";
 import { useRecordForm } from "./hooks/useRecordForm";
 import { useCameraHandler } from "./hooks/useCameraHandler";
 import { useBloodPressureData } from "./hooks/useBloodPressureData";
+import { usePDFExportHistory } from "./hooks/usePDFExportHistory";
 
 export default function App() {
-  const { readings, lastReading, addReading } = useBloodPressureData();
+  const {
+    bloodPressureReadings,
+    lastBloodPressureReading,
+    addBloodPressureReading,
+  } = useBloodPressureData();
+  const { exportRecord } = usePDFExportHistory();
 
   // Custom hooks for form handling
   const {
@@ -32,7 +38,7 @@ export default function App() {
     openForm,
     closeForm,
     handleFormSubmit,
-  } = useRecordForm(addReading);
+  } = useRecordForm(addBloodPressureReading);
   // Custom hook for camera handling
   const {
     isCameraVisible,
@@ -46,12 +52,24 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Latest Entry</Text>
 
-      {lastReading ? (
+      {lastBloodPressureReading ? (
         <View style={styles.lastRecordContainer}>
-          <MetricRow label="Created at:" value={lastReading.createdAt} />
-          <MetricRow label="Systolic (SYS):" value={lastReading.systolic} />
-          <MetricRow label="Diastolic (DIA):" value={lastReading.diastolic} />
-          <MetricRow label="Pulse (PPM):" value={lastReading.pulse} />
+          <MetricRow
+            label="Created at:"
+            value={lastBloodPressureReading.createdAt}
+          />
+          <MetricRow
+            label="Systolic (SYS):"
+            value={lastBloodPressureReading.systolic}
+          />
+          <MetricRow
+            label="Diastolic (DIA):"
+            value={lastBloodPressureReading.diastolic}
+          />
+          <MetricRow
+            label="Pulse (PPM):"
+            value={lastBloodPressureReading.pulse}
+          />
         </View>
       ) : (
         <View style={styles.placeholderContainer}>
@@ -105,7 +123,24 @@ export default function App() {
         onPhotoTaken={handlePhotoTaken}
       />
       <Text style={styles.title}>History</Text>
-      <HistoryList readings={readings} />
+      <View style={styles.exportButtonContainer}>
+        {lastBloodPressureReading && (
+          <View style={styles.exportButtonContainer}>
+            <IconButton
+              onPress={() => exportRecord(bloodPressureReadings)}
+              text="Export Last Record as PDF"
+              icon={
+                <MaterialCommunityIcons
+                  name="file-pdf-box"
+                  size={22}
+                  color="white"
+                />
+              }
+            />
+          </View>
+        )}
+      </View>
+      <HistoryList readings={bloodPressureReadings} />
       <StatusBar style="auto" />
       <LoadingModal visible={isLoading} />
     </SafeAreaView>

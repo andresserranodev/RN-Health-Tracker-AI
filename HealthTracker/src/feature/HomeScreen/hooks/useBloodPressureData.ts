@@ -8,23 +8,25 @@ import { toReading } from "../../BloodPressureForm/bloodPressureMapper";
 
 /**
  * @description Custom hook to manage the state and data operations for blood pressure readings.
- * @returns An object with the list of readings, the latest reading, and functions to interact with the data.
+ * @returns An object with the list of bloodPressureReadings, the latest lastBloodPressureReading, and functions to interact with the data setBloodPressure.
  */
 export const useBloodPressureData = () => {
-  const [readings, setReadings] = useState<BloodPressureReading[]>([]);
+  const [bloodPressureReadings, setBloodPressure] = useState<
+    BloodPressureReading[]
+  >([]);
 
-  const lastReading = useMemo(
-    () => (readings.length > 0 ? readings[0] : null),
-    [readings]
+  const lastBloodPressureReading = useMemo(
+    () => (bloodPressureReadings.length > 0 ? bloodPressureReadings[0] : null),
+    [bloodPressureReadings]
   );
 
   const refreshReadings = useCallback(() => {
-    const allReadings = getAllBloodPressureReadingsUseCase();
-    console.log(allReadings);
-    setReadings(allReadings);
+    const bloodPressureReadings = getAllBloodPressureReadingsUseCase();
+    console.log(bloodPressureReadings);
+    setBloodPressure(bloodPressureReadings);
   }, []);
 
-  const addReading = useCallback(
+  const addBloodPressureReading = useCallback(
     (formData: BloodPressureFormValues) => {
       saveBloodPressureRecordUseCase(toReading(formData));
       refreshReadings();
@@ -37,8 +39,8 @@ export const useBloodPressureData = () => {
   }, [refreshReadings]);
 
   return {
-    readings,
-    lastReading,
-    addReading,
+    bloodPressureReadings,
+    lastBloodPressureReading,
+    addBloodPressureReading,
   };
 };
