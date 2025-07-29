@@ -39,7 +39,10 @@ export const useCameraHandler = (
         if (formValues) {
           onDataExtracted(formValues);
         } else {
-          Alert.alert("Error", "Could not extract valid readings from the image.");
+          Alert.alert(
+            "Error",
+            "Could not extract valid readings from the image."
+          );
         }
       } catch (error) {
         console.error(error);

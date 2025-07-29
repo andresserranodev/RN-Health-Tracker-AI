@@ -1,11 +1,12 @@
-import React from 'react';
-import { View, Text, FlatList } from 'react-native';
-import { styles } from './styles';
-import { BloodPressureReading } from '../../domain/models/bloodPressureReading';
+import React from "react";
+import { View, Text, FlatList } from "react-native";
+import { styles } from "./styles";
+import { BloodPressureReading } from "../../domain/models/bloodPressureReading";
 import MetricRow from "../../components/MetricRow";
 
 type HistoryListProps = {
-  readings: BloodPressureReading[];};
+  readings: BloodPressureReading[];
+};
 
 const ReadingItem = ({ item }: { item: BloodPressureReading }) => (
   <View style={styles.recordItem}>
@@ -15,7 +16,7 @@ const ReadingItem = ({ item }: { item: BloodPressureReading }) => (
   </View>
 );
 
-const HistoryList = ({ readings}: HistoryListProps) => {
+const HistoryList = ({ readings }: HistoryListProps) => {
   return (
     <View style={styles.container}>
       <FlatList

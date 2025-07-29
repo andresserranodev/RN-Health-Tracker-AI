@@ -1,6 +1,6 @@
 export type BloodPressureRecordModel = {
-    sys:number;
-    dia: number;
-    ppm: number;
-    createdAt: string; 
-  };
+  sys: number;
+  dia: number;
+  ppm: number;
+  createdAt: string;
+};

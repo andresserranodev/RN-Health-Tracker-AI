@@ -9,7 +9,7 @@ export const toFormValues = (
   }
   const sysNum = Number(reading.systolic);
   const diaNum = Number(reading.diastolic);
-  const ppmNum = Number(reading.pulse)
+  const ppmNum = Number(reading.pulse);
 
   if (isNaN(sysNum) || isNaN(diaNum) || isNaN(ppmNum)) {
     console.warn("Invalid data found while mapping to form values:", reading);
@@ -23,13 +23,13 @@ export const toFormValues = (
 };
 
 export const toReading = (
-  fromValues: BloodPressureFormValues): BloodPressureReading => {
-
+  fromValues: BloodPressureFormValues
+): BloodPressureReading => {
   return {
     id: "",
     systolic: fromValues.sys.toString(),
     diastolic: fromValues.dia.toString(),
     pulse: fromValues.ppm.toString(),
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
   };
 };

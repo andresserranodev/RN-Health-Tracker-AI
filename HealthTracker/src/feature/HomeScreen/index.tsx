@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useCallback } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -20,11 +20,9 @@ import HistoryList from "../../components/HistoryList";
 // Hooks
 import { useRecordForm } from "./hooks/useRecordForm";
 import { useCameraHandler } from "./hooks/useCameraHandler";
-import { useBloodPressureData } from './hooks/useBloodPressureData';
-
+import { useBloodPressureData } from "./hooks/useBloodPressureData";
 
 export default function App() {
-
   const { readings, lastReading, addReading } = useBloodPressureData();
 
   // Custom hooks for form handling
@@ -43,7 +41,6 @@ export default function App() {
     closeCamera,
     handlePhotoTaken,
   } = useCameraHandler(openForm);
-
 
   return (
     <SafeAreaView style={styles.container}>

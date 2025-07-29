@@ -1,5 +1,5 @@
 export interface BloodPressureReading {
-  id: string,
+  id: string;
   systolic: string;
   diastolic: string;
   pulse: string;
