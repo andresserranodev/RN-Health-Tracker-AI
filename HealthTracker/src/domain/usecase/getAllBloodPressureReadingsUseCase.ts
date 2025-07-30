@@ -1,8 +1,8 @@
 import { BloodPressureReading } from "../../domain/models/bloodPressureReading";
-import { bloodPressureRepository as registroRepository } from "../../data/mmkvBloodPressureRepository";
+import { bloodPressureRepository } from "../../data/mmkvBloodPressureRepository";
 
 export const getAllBloodPressureReadingsUseCase =
   (): BloodPressureReading[] => {
-    const readings = registroRepository.getAll();
+    const readings = bloodPressureRepository.getAll();
     return readings;
   };

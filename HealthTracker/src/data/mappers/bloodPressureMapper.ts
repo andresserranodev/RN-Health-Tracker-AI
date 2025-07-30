@@ -14,6 +14,7 @@ export const toRecordModel = (
   if (isNaN(sysNum) || isNaN(diaNum) || isNaN(ppmNum)) {
     throw new Error("Invalid numeric value provided. Cannot create record.");
   }
+  console.log(uuidv4());
   return {
     id: uuidv4(),
     sys: sysNum,

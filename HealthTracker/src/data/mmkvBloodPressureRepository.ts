@@ -32,6 +32,7 @@ export const bloodPressureRepository: IBloodPressureRepository = {
   },
   getAll: (): BloodPressureReading[] => {
     const records = getAllRawRecords();
+    console.log(records);
     if (records.length === 0) {
       return [];
     }
