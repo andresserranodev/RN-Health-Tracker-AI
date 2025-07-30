@@ -1,3 +1,5 @@
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 import { BloodPressureRecordModel } from "../models/bloodPressureRecordModel";
 import { BloodPressureReading } from "../../domain/models/bloodPressureReading";
 import { format } from "date-fns";
@@ -13,6 +15,7 @@ export const toRecordModel = (
     throw new Error("Invalid numeric value provided. Cannot create record.");
   }
   return {
+    id: uuidv4(),
     sys: sysNum,
     dia: diaNum,
     ppm: ppmNum,
@@ -26,7 +29,7 @@ export const toReadingUI = (
   const dateObject = new Date(recordModel.createdAt);
   const formattedDate = format(dateObject, "hh:mm a-dd/MM/yyyy");
   return {
-    id: recordModel.createdAt, // TODO replace with DB implementation
+    id: recordModel.id,
     systolic: recordModel.sys.toString(),
     diastolic: recordModel.dia.toString(),
     pulse: recordModel.ppm.toString(),
