@@ -22,6 +22,9 @@ export const styles = StyleSheet.create({
     textAlign: "center",
   },
   recordItem: {
+    flexDirection: "row", // Arrange items in a row
+    alignItems: "center", // Center items vertically
+    gap: 15,
     backgroundColor: "white",
     paddingHorizontal: 20,
     paddingVertical: 15,
