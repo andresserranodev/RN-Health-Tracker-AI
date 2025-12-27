@@ -4,6 +4,7 @@ import { BloodPressureReading } from "../../../domain/models/bloodPressureReadin
 import { BloodPressureFormValues } from "../../BloodPressureForm/types";
 import { getAllBloodPressureReadingsUseCase } from "../../../domain/usecase/getAllBloodPressureReadingsUseCase";
 import { saveBloodPressureRecordUseCase } from "../../../domain/usecase/saveBloodPressureUseCase";
+import { deleteBloodPressureRecordUseCase } from "../../../domain/usecase/deleteBloodPressureRecordUseCase";
 import { toReading } from "../../BloodPressureForm/bloodPressureMapper";
 
 /**
@@ -38,9 +39,18 @@ export const useBloodPressureData = () => {
     refreshReadings();
   }, [refreshReadings]);
 
+  const deleteBloodPressureReading = useCallback(
+    (id: string) => {
+      deleteBloodPressureRecordUseCase(id);
+      refreshReadings();
+    },
+    [refreshReadings]
+  );
+
   return {
     bloodPressureReadings,
     lastBloodPressureReading,
     addBloodPressureReading,
+    deleteBloodPressureReading,
   };
 };

@@ -40,8 +40,13 @@ export const geminiRepository = {
 
       const firstCandidate = response.data.candidates[0];
       if (firstCandidate && firstCandidate.content.parts[0].text) {
-        const jsonString = firstCandidate.content.parts[0].text;
-        console.log("Response from Gemini:", jsonString);
+        const rawText = firstCandidate.content.parts[0].text;
+
+        // Extract JSON string from the triple backticks
+        const jsonString = rawText.replace(/```json|```/g, "").trim();
+
+        console.log("Extracted JSON string:", jsonString);
+
         const parsedData: BloodPressureReading = JSON.parse(jsonString);
         return parsedData;
       }

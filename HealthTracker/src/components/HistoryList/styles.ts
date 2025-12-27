@@ -39,4 +39,9 @@ export const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: "right",
   },
+  deleteButton: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+  },
 });

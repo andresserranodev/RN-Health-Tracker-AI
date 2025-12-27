@@ -22,4 +22,19 @@ export const inMemoryBloodPressureRepository: IBloodPressureRepository = {
       )
       .map(toReadingUI);
   },
+  update: (
+    id: string,
+    formData: BloodPressureReading
+  ): BloodPressureRecordModel => {
+    const index = readings.findIndex((reading) => reading.createdAt === id);
+    if (index === -1) {
+      throw new Error("Reading not found");
+    }
+    const updatedReading = toRecordModel(formData);
+    readings[index] = updatedReading;
+    return updatedReading;
+  },
+  delete: (id: string): void => {
+    readings = readings.filter((reading) => reading.createdAt !== id);
+  },
 };

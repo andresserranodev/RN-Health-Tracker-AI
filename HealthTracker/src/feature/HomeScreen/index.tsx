@@ -28,6 +28,7 @@ export default function App() {
     bloodPressureReadings,
     lastBloodPressureReading,
     addBloodPressureReading,
+    deleteBloodPressureReading,
   } = useBloodPressureData();
   const { exportRecord } = usePDFExportHistory();
 
@@ -140,7 +141,10 @@ export default function App() {
           </View>
         )}
       </View>
-      <HistoryList readings={bloodPressureReadings} />
+      <HistoryList
+        readings={bloodPressureReadings}
+        onDelete={deleteBloodPressureReading}
+      />
       <StatusBar style="auto" />
       <LoadingModal visible={isLoading} />
     </SafeAreaView>
