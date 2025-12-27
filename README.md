@@ -12,7 +12,7 @@ All project management, tracking, and documentation are centralized on our Notio
 
 ## 📋 Overview
 
-![Demo](https://github.com/andresserranodev/RN-Health-Tracker-AI/demo.gif)
+![Preview](https://github.com/andresserranodev/RN-Health-Tracker-AI/blob/main/demo.gif)
 
 ## 🎯 Project Purpose
 
