@@ -1,12 +1,7 @@
-import React from "react";
-import {
-  TouchableOpacity,
-  Text,
-  View,
-  StyleProp,
-  ViewStyle,
-} from "react-native";
-import { styles } from "./styles";
+import React from 'react';
+import {TouchableOpacity, Text, View, StyleProp, ViewStyle} from 'react-native';
+
+import {styles} from './styles';
 
 type IconButtonProps = {
   onPress: () => void;
@@ -15,7 +10,7 @@ type IconButtonProps = {
   style?: StyleProp<ViewStyle>;
 };
 
-const IconButton = ({ onPress, text, icon, style }: IconButtonProps) => {
+const IconButton = ({onPress, text, icon, style}: IconButtonProps) => {
   return (
     <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
       <View style={styles.buttonContent}>

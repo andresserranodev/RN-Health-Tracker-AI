@@ -1,5 +1,6 @@
-import { validationMessages } from "../../constants/validationMessages";
-import * as yup from "yup";
+import * as yup from 'yup';
+
+import {validationMessages} from '../../constants/validationMessages';
 
 export const validationSchema = yup.object().shape({
   sys: yup

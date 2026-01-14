@@ -1,8 +1,9 @@
-import { useState, useCallback } from "react";
-import { Alert } from "react-native";
-import { extractReadingsFromImageUseCase } from "../../../domain/usecase/extractReadingsFromImageUseCase";
-import { toFormValues } from "../../BloodPressureForm/bloodPressureMapper";
-import { BloodPressureFormValues } from "../../BloodPressureForm/types";
+import {useState, useCallback} from 'react';
+import {Alert} from 'react-native';
+
+import {extractReadingsFromImageUseCase} from '../../../domain/usecase/extractReadingsFromImageUseCase';
+import {toFormValues} from '../../BloodPressureForm/bloodPressureMapper';
+import {BloodPressureFormValues} from '../../BloodPressureForm/types';
 /**
  * @description Custom hook to manage the state and logic for the camera feature.
  * It handles the camera modal's visibility, the loading state during image processing,
@@ -21,7 +22,7 @@ import { BloodPressureFormValues } from "../../BloodPressureForm/types";
  * const { isCameraVisible, isLoading, openCamera, closeCamera, handlePhotoTaken } = useCameraHandler(openForm);
  */
 export const useCameraHandler = (
-  onDataExtracted: (data: BloodPressureFormValues) => void
+  onDataExtracted: (data: BloodPressureFormValues) => void,
 ) => {
   const [isCameraVisible, setCameraVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -40,18 +41,18 @@ export const useCameraHandler = (
           onDataExtracted(formValues);
         } else {
           Alert.alert(
-            "Error",
-            "Could not extract valid readings from the image."
+            'Error',
+            'Could not extract valid readings from the image.',
           );
         }
       } catch (error) {
-        console.error(error);
-        Alert.alert("Error", "Could not analyze the image.");
+        console.error('Image analysis error:', error);
+        Alert.alert('Error', 'Could not analyze the image.');
       } finally {
         setIsLoading(false);
       }
     },
-    [onDataExtracted, closeCamera]
+    [onDataExtracted, closeCamera],
   );
 
   return {

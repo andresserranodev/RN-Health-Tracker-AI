@@ -1,15 +1,9 @@
-import React, { useState, useRef } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Modal,
-  Alert,
-  Image,
-} from "react-native";
-import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
-import { Feather } from "@expo/vector-icons";
-import { styles } from "./styles";
+import {Feather} from '@expo/vector-icons';
+import {CameraView, CameraType, useCameraPermissions} from 'expo-camera';
+import React, {useState, useRef} from 'react';
+import {View, Text, TouchableOpacity, Modal, Alert, Image} from 'react-native';
+
+import {styles} from './styles';
 
 interface CameraModalProps {
   visible: boolean;
@@ -27,10 +21,10 @@ export default function CameraModal({
   onClose,
   onPhotoTaken,
 }: CameraModalProps) {
-  const [facing, setFacing] = useState<CameraType>("back");
+  const [facing, setFacing] = useState<CameraType>('back');
   const [permission, requestPermission] = useCameraPermissions();
   const [capturedPhoto, setCapturedPhoto] = useState<CapturedPhoto | null>(
-    null
+    null,
   );
 
   const cameraRef = useRef<CameraView>(null);
@@ -43,7 +37,7 @@ export default function CameraModal({
   if (!permission.granted) {
     // Camera permissions are not granted yet
     return (
-      <Modal visible={visible} transparent={true} animationType="slide">
+      <Modal visible={visible} transparent={true} animationType='slide'>
         <View style={styles.permissionContainer}>
           <View style={styles.permissionContent}>
             <Text style={styles.permissionText}>
@@ -51,8 +45,7 @@ export default function CameraModal({
             </Text>
             <TouchableOpacity
               style={styles.permissionButton}
-              onPress={requestPermission}
-            >
+              onPress={requestPermission}>
               <Text style={styles.permissionButtonText}>Grant Permission</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.closeButton} onPress={onClose}>
@@ -65,7 +58,7 @@ export default function CameraModal({
   }
 
   const toggleCameraFacing = () => {
-    setFacing((current) => (current === "back" ? "front" : "back"));
+    setFacing(current => (current === 'back' ? 'front' : 'back'));
   };
 
   const takePicture = async () => {
@@ -85,8 +78,8 @@ export default function CameraModal({
           });
         }
       } catch (error) {
-        Alert.alert("Error", "Failed to take picture");
-        console.error("Camera error:", error);
+        Alert.alert('Error', 'Failed to take picture');
+        console.error('Camera error:', error);
       }
     }
   };
@@ -109,33 +102,31 @@ export default function CameraModal({
   };
 
   return (
-    <Modal visible={visible} transparent={false} animationType="slide">
+    <Modal visible={visible} transparent={false} animationType='slide'>
       <View style={styles.container}>
         {capturedPhoto ? (
           // Photo preview screen
           <View style={styles.previewContainer}>
             <Image
-              source={{ uri: capturedPhoto.uri }}
+              source={{uri: capturedPhoto.uri}}
               style={styles.previewImage}
             />
             <View style={styles.previewControls}>
               <TouchableOpacity
                 style={styles.retakeButton}
-                onPress={retakePhoto}
-              >
-                <Feather name="rotate-ccw" size={24} color="white" />
+                onPress={retakePhoto}>
+                <Feather name='rotate-ccw' size={24} color='white' />
                 <Text style={styles.buttonText}>Retake</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveButton} onPress={savePhoto}>
-                <Feather name="check" size={24} color="white" />
+                <Feather name='check' size={24} color='white' />
                 <Text style={styles.buttonText}>Analyze</Text>
               </TouchableOpacity>
             </View>
             <TouchableOpacity
               style={styles.closeButtonTop}
-              onPress={handleClose}
-            >
-              <Feather name="x" size={24} color="white" />
+              onPress={handleClose}>
+              <Feather name='x' size={24} color='white' />
             </TouchableOpacity>
           </View>
         ) : (
@@ -145,27 +136,24 @@ export default function CameraModal({
               style={styles.camera}
               facing={facing}
               ref={cameraRef}
-              ratio="4:3" // TODO Adjust ratio when needed using a crop tool
+              ratio='4:3' // TODO Adjust ratio when needed using a crop tool
             />
             <View style={styles.cameraControls}>
               <TouchableOpacity
                 style={styles.closeButtonTop}
-                onPress={handleClose}
-              >
-                <Feather name="x" size={24} color="white" />
+                onPress={handleClose}>
+                <Feather name='x' size={24} color='white' />
               </TouchableOpacity>
 
               <View style={styles.bottomControls}>
                 <TouchableOpacity
                   style={styles.flipButton}
-                  onPress={toggleCameraFacing}
-                >
-                  <Feather name="rotate-cw" size={24} color="white" />
+                  onPress={toggleCameraFacing}>
+                  <Feather name='rotate-cw' size={24} color='white' />
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.captureButton}
-                  onPress={takePicture}
-                >
+                  onPress={takePicture}>
                   <View style={styles.captureButtonInner} />
                 </TouchableOpacity>
                 <View style={styles.placeholder} />

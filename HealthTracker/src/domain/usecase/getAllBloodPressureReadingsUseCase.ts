@@ -1,6 +1,5 @@
-import { inMemoryBloodPressureRepository } from "../../data/inMemoryBloodPressureRepository";
-
-import { BloodPressureReading } from "../../domain/models/bloodPressureReading";
+import {inMemoryBloodPressureRepository} from '../../data/inMemoryBloodPressureRepository';
+import {BloodPressureReading} from '../../domain/models/bloodPressureReading';
 
 export const getAllBloodPressureReadingsUseCase =
   (): BloodPressureReading[] => {

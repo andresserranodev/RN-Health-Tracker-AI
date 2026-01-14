@@ -1,27 +1,22 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import {
-  View,
-  Text,
-  Modal,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
-import LoadingModal from "../../components/LoadingModal";
-import MetricRow from "../../components/MetricRow";
-import { styles } from "./styles";
-import { Feather } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import IconButton from "../../components/IconButton";
-import BloodPressureForm from "../BloodPressureForm";
-import CameraModal from "../../components/CameraModal";
-import HistoryList from "../../components/HistoryList";
+import {Feather} from '@expo/vector-icons';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
+import {StatusBar} from 'expo-status-bar';
+import React from 'react';
+import {View, Text, Modal, TouchableOpacity, SafeAreaView} from 'react-native';
+
+import CameraModal from '../../components/CameraModal';
+import HistoryList from '../../components/HistoryList';
+import IconButton from '../../components/IconButton';
+import LoadingModal from '../../components/LoadingModal';
+import MetricRow from '../../components/MetricRow';
+import BloodPressureForm from '../BloodPressureForm';
 
 // Hooks
-import { useRecordForm } from "./hooks/useRecordForm";
-import { useCameraHandler } from "./hooks/useCameraHandler";
-import { useBloodPressureData } from "./hooks/useBloodPressureData";
-import { usePDFExportHistory } from "./hooks/usePDFExportHistory";
+import {useBloodPressureData} from './hooks/useBloodPressureData';
+import {useCameraHandler} from './hooks/useCameraHandler';
+import {usePDFExportHistory} from './hooks/usePDFExportHistory';
+import {useRecordForm} from './hooks/useRecordForm';
+import {styles} from './styles';
 
 export default function App() {
   const {
@@ -30,16 +25,11 @@ export default function App() {
     addBloodPressureReading,
     deleteBloodPressureReading,
   } = useBloodPressureData();
-  const { exportRecord } = usePDFExportHistory();
+  const {exportRecord} = usePDFExportHistory();
 
   // Custom hooks for form handling
-  const {
-    isModalVisible,
-    prefilledData,
-    openForm,
-    closeForm,
-    handleFormSubmit,
-  } = useRecordForm(addBloodPressureReading);
+  const {isModalVisible, prefilledData, openForm, closeForm, handleFormSubmit} =
+    useRecordForm(addBloodPressureReading);
   // Custom hook for camera handling
   const {
     isCameraVisible,
@@ -56,19 +46,19 @@ export default function App() {
       {lastBloodPressureReading ? (
         <View style={styles.lastRecordContainer}>
           <MetricRow
-            label="Created at:"
+            label='Created at:'
             value={lastBloodPressureReading.createdAt}
           />
           <MetricRow
-            label="Systolic (SYS):"
+            label='Systolic (SYS):'
             value={lastBloodPressureReading.systolic}
           />
           <MetricRow
-            label="Diastolic (DIA):"
+            label='Diastolic (DIA):'
             value={lastBloodPressureReading.diastolic}
           />
           <MetricRow
-            label="Pulse (PPM):"
+            label='Pulse (PPM):'
             value={lastBloodPressureReading.pulse}
           />
         </View>
@@ -83,17 +73,17 @@ export default function App() {
       <View style={styles.buttonContainer}>
         <IconButton
           onPress={() => openCamera()}
-          text="Camera"
-          icon={<Feather name="camera" size={22} color="white" />}
+          text='Camera'
+          icon={<Feather name='camera' size={22} color='white' />}
         />
         <IconButton
           onPress={() => openForm()}
-          text="Form"
+          text='Form'
           icon={
             <MaterialCommunityIcons
-              name="square-edit-outline"
+              name='square-edit-outline'
               size={22}
-              color="white"
+              color='white'
             />
           }
         />
@@ -102,13 +92,12 @@ export default function App() {
       <Modal
         visible={isModalVisible}
         transparent={true}
-        animationType="slide"
-        onRequestClose={closeForm}
-      >
+        animationType='slide'
+        onRequestClose={closeForm}>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <TouchableOpacity style={styles.closeButton} onPress={closeForm}>
-              <Feather name="x" size={24} color="black" />
+              <Feather name='x' size={24} color='black' />
             </TouchableOpacity>
             <BloodPressureForm
               initialValues={prefilledData}
@@ -129,12 +118,12 @@ export default function App() {
           <View style={styles.exportButtonContainer}>
             <IconButton
               onPress={() => exportRecord(bloodPressureReadings)}
-              text="Export Last Record as PDF"
+              text='Export Last Record as PDF'
               icon={
                 <MaterialCommunityIcons
-                  name="file-pdf-box"
+                  name='file-pdf-box'
                   size={22}
-                  color="white"
+                  color='white'
                 />
               }
             />
@@ -145,7 +134,7 @@ export default function App() {
         readings={bloodPressureReadings}
         onDelete={deleteBloodPressureReading}
       />
-      <StatusBar style="auto" />
+      <StatusBar style='auto' />
       <LoadingModal visible={isLoading} />
     </SafeAreaView>
   );
