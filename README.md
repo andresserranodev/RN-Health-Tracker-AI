@@ -10,7 +10,9 @@ All project management, tracking, and documentation are centralized on our Notio
 
 [**Access the Presure Health Tracker Notion Board**](https://www.notion.so/Presure-Health-Tracker-237b4495048780ab9ab9fcb54156b790?source=copy_link)
 
-## 📋 Overview [WIP]
+## 📋 Overview
+
+![Preview](https://github.com/andresserranodev/RN-Health-Tracker-AI/blob/main/preview.gif)
 
 ## 🎯 Project Purpose
 
