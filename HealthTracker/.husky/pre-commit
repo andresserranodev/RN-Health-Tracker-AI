@@ -1,0 +1,2 @@
+# Run our custom linting script
+./.kilocode/rules/pre-commit-lint.sh

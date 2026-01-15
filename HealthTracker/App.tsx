@@ -1,21 +1,31 @@
-import "react-native-gesture-handler";
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
-import AppNavigator from "./src/navigation/AppNavigator";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import 'react-native-gesture-handler';
+
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {NavigationContainer} from '@react-navigation/native';
+import {StatusBar} from 'expo-status-bar';
+import React from 'react';
+import {StyleSheet} from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+
+import AppNavigator from './src/navigation/AppNavigator';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export default function App() {
   if (__DEV__) {
-    require("./ReactotronConfig");
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    require('./ReactotronConfig');
   }
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={styles.container}>
       <BottomSheetModalProvider>
         <NavigationContainer>
           <AppNavigator />
-          <StatusBar style="auto" />
+          <StatusBar style='auto' />
         </NavigationContainer>
       </BottomSheetModalProvider>
     </GestureHandlerRootView>

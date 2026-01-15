@@ -1,5 +1,6 @@
-import { useState, useCallback } from "react";
-import { BloodPressureFormValues } from "../../BloodPressureForm/types";
+import {useState, useCallback} from 'react';
+
+import {BloodPressureFormValues} from '../../BloodPressureForm/types';
 /**
  * @description Custom hook to manage the state and actions for the blood pressure form modal.
  * It encapsulates the logic for modal visibility, pre-filled data, and form event handlers.
@@ -17,7 +18,7 @@ import { BloodPressureFormValues } from "../../BloodPressureForm/types";
  * const { isModalVisible, prefilledData, openForm, closeForm, handleFormSubmit } = useRecordForm(setLastRecord);
  */
 export const useRecordForm = (
-  onSave: (data: BloodPressureFormValues) => void
+  onSave: (data: BloodPressureFormValues) => void,
 ) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [prefilledData, setPrefilledData] = useState<
@@ -38,7 +39,7 @@ export const useRecordForm = (
       onSave(data);
       closeForm();
     },
-    [onSave, closeForm]
+    [onSave, closeForm],
   );
 
   return {

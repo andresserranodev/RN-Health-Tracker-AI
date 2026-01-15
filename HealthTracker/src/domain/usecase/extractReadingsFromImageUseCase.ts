@@ -1,5 +1,5 @@
-import { BloodPressureReading } from "../models/bloodPressureReading";
-import { geminiRepository } from "../../data/repositories/geminiRepository";
+import {geminiRepository} from '../../data/repositories/geminiRepository';
+import {BloodPressureReading} from '../models/bloodPressureReading';
 
 /**
  * Extracts blood pressure readings from a given image in Base64 format.
@@ -10,10 +10,10 @@ import { geminiRepository } from "../../data/repositories/geminiRepository";
  * @throws An error if the provided image data is invalid or insufficient.
  */
 export const extractReadingsFromImageUseCase = async (
-  imageBase64: string
+  imageBase64: string,
 ): Promise<BloodPressureReading> => {
   if (!imageBase64 || imageBase64.length < 100) {
-    throw new Error("Invalid image data provided.");
+    throw new Error('Invalid image data provided.');
   }
   return await geminiRepository.getReadingsFromImage(imageBase64);
 };

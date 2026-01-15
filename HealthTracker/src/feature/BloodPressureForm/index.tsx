@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
-import { View, Text, Button } from "react-native";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { validationSchema } from "./validationschema";
-import { styles } from "./styles";
-import { BloodPressureFormValues } from "./types";
-import LabeledInput from "../../components/LabeledInput";
+import {yupResolver} from '@hookform/resolvers/yup';
+import React, {useEffect} from 'react';
+import {useForm, Controller} from 'react-hook-form';
+import {View, Text, Button} from 'react-native';
 
-import * as yup from "yup";
+import LabeledInput from '../../components/LabeledInput';
+
+import {styles} from './styles';
+import {BloodPressureFormValues} from './types';
+import {validationSchema} from './validationschema';
 
 type BloodPressureFormProps = {
   onSubmit: (data: BloodPressureFormValues) => void;
@@ -23,7 +23,7 @@ export default function BloodPressureForm({
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: {errors},
     reset,
   } = useForm<BloodPressureFormValues>({
     defaultValues: initialValues || {
@@ -44,14 +44,14 @@ export default function BloodPressureForm({
       <Text style={styles.formTitle}>Add new register</Text>
       <Controller
         control={control}
-        name="sys"
-        render={({ field: { onChange, onBlur, value } }) => (
+        name='sys'
+        render={({field: {onChange, onBlur, value}}) => (
           <LabeledInput
-            label="Systolic (SYS)"
+            label='Systolic (SYS)'
             onBlur={onBlur}
             onChangeText={onChange}
             value={value?.toString()}
-            keyboardType="numeric"
+            keyboardType='numeric'
             error={errors.sys}
           />
         )}
@@ -59,14 +59,14 @@ export default function BloodPressureForm({
 
       <Controller
         control={control}
-        name="dia"
-        render={({ field: { onChange, onBlur, value } }) => (
+        name='dia'
+        render={({field: {onChange, onBlur, value}}) => (
           <LabeledInput
-            label="Diastolic (DIA)"
+            label='Diastolic (DIA)'
             onBlur={onBlur}
             onChangeText={onChange}
             value={value?.toString()}
-            keyboardType="numeric"
+            keyboardType='numeric'
             error={errors.dia}
           />
         )}
@@ -74,22 +74,22 @@ export default function BloodPressureForm({
 
       <Controller
         control={control}
-        name="ppm"
-        render={({ field: { onChange, onBlur, value } }) => (
+        name='ppm'
+        render={({field: {onChange, onBlur, value}}) => (
           <LabeledInput
-            label="Pulse (PPM)"
+            label='Pulse (PPM)'
             onBlur={onBlur}
             onChangeText={onChange}
             value={value?.toString()}
-            keyboardType="numeric"
+            keyboardType='numeric'
             error={errors.ppm}
           />
         )}
       />
 
       <View style={styles.buttonGroup}>
-        <Button title="Close" onPress={onClose} />
-        <Button title="Save" onPress={handleSubmit(onSubmit)} />
+        <Button title='Close' onPress={onClose} />
+        <Button title='Save' onPress={handleSubmit(onSubmit)} />
       </View>
     </View>
   );

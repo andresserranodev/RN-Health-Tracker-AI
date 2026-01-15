@@ -1,11 +1,12 @@
 // src/features/Home/useBloodPressureData.ts
-import { useState, useMemo, useCallback, useEffect } from "react";
-import { BloodPressureReading } from "../../../domain/models/bloodPressureReading";
-import { BloodPressureFormValues } from "../../BloodPressureForm/types";
-import { getAllBloodPressureReadingsUseCase } from "../../../domain/usecase/getAllBloodPressureReadingsUseCase";
-import { saveBloodPressureRecordUseCase } from "../../../domain/usecase/saveBloodPressureUseCase";
-import { deleteBloodPressureRecordUseCase } from "../../../domain/usecase/deleteBloodPressureRecordUseCase";
-import { toReading } from "../../BloodPressureForm/bloodPressureMapper";
+import {useState, useMemo, useCallback, useEffect} from 'react';
+
+import {BloodPressureReading} from '../../../domain/models/bloodPressureReading';
+import {deleteBloodPressureRecordUseCase} from '../../../domain/usecase/deleteBloodPressureRecordUseCase';
+import {getAllBloodPressureReadingsUseCase} from '../../../domain/usecase/getAllBloodPressureReadingsUseCase';
+import {saveBloodPressureRecordUseCase} from '../../../domain/usecase/saveBloodPressureUseCase';
+import {toReading} from '../../BloodPressureForm/bloodPressureMapper';
+import {BloodPressureFormValues} from '../../BloodPressureForm/types';
 
 /**
  * @description Custom hook to manage the state and data operations for blood pressure readings.
@@ -18,12 +19,11 @@ export const useBloodPressureData = () => {
 
   const lastBloodPressureReading = useMemo(
     () => (bloodPressureReadings.length > 0 ? bloodPressureReadings[0] : null),
-    [bloodPressureReadings]
+    [bloodPressureReadings],
   );
 
   const refreshReadings = useCallback(() => {
     const bloodPressureReadings = getAllBloodPressureReadingsUseCase();
-    console.log(bloodPressureReadings);
     setBloodPressure(bloodPressureReadings);
   }, []);
 
@@ -32,19 +32,23 @@ export const useBloodPressureData = () => {
       saveBloodPressureRecordUseCase(toReading(formData));
       refreshReadings();
     },
-    [refreshReadings]
+    [refreshReadings],
   );
 
   useEffect(() => {
-    refreshReadings();
-  }, [refreshReadings]);
+    const loadReadings = () => {
+      const bloodPressureReadings = getAllBloodPressureReadingsUseCase();
+      setBloodPressure(bloodPressureReadings);
+    };
+    loadReadings();
+  }, []);
 
   const deleteBloodPressureReading = useCallback(
     (id: string) => {
       deleteBloodPressureRecordUseCase(id);
       refreshReadings();
     },
-    [refreshReadings]
+    [refreshReadings],
   );
 
   return {

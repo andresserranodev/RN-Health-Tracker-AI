@@ -1,8 +1,9 @@
-import { BloodPressureReading } from "../../domain/models/bloodPressureReading";
-import { BloodPressureFormValues } from "./types";
+import {BloodPressureReading} from '../../domain/models/bloodPressureReading';
+
+import {BloodPressureFormValues} from './types';
 
 export const toFormValues = (
-  reading: BloodPressureReading | null
+  reading: BloodPressureReading | null,
 ): BloodPressureFormValues | null => {
   if (!reading) {
     return null;
@@ -12,7 +13,7 @@ export const toFormValues = (
   const ppmNum = Number(reading.pulse);
 
   if (isNaN(sysNum) || isNaN(diaNum) || isNaN(ppmNum)) {
-    console.warn("Invalid data found while mapping to form values:", reading);
+    console.warn('Invalid data found while mapping to form values:', reading);
     return null;
   }
   return {
@@ -23,10 +24,10 @@ export const toFormValues = (
 };
 
 export const toReading = (
-  fromValues: BloodPressureFormValues
+  fromValues: BloodPressureFormValues,
 ): BloodPressureReading => {
   return {
-    id: "",
+    id: '',
     systolic: fromValues.sys.toString(),
     diastolic: fromValues.dia.toString(),
     pulse: fromValues.ppm.toString(),

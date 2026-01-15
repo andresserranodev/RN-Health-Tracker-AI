@@ -1,28 +1,29 @@
-import { useCallback } from "react";
-import { Alert } from "react-native";
-import * as Print from "expo-print";
-import * as Sharing from "expo-sharing";
-import { BloodPressureReading } from ".././../../domain/models/bloodPressureReading";
+import * as Print from 'expo-print';
+import * as Sharing from 'expo-sharing';
+import {useCallback} from 'react';
+import {Alert} from 'react-native';
+
+import {BloodPressureReading} from '.././../../domain/models/bloodPressureReading';
 
 export const usePDFExportHistory = () => {
   const exportRecord = useCallback(async (records: BloodPressureReading[]) => {
     if (!records) {
-      Alert.alert("No Data", "There is no record to export.");
+      Alert.alert('No Data', 'There is no record to export.');
       return;
     }
 
     const tableRows = records
       .map(
-        (record) => `
+        record => `
         <tr>
           <td>${record.createdAt}</td>
           <td>${record.systolic}</td>
           <td>${record.diastolic}</td>
           <td>${record.pulse}</td>
         </tr>
-      `
+      `,
       )
-      .join("");
+      .join('');
 
     const htmlContent = `
       <html>
@@ -55,24 +56,24 @@ export const usePDFExportHistory = () => {
     `;
 
     try {
-      const { uri } = await Print.printToFileAsync({
+      const {uri} = await Print.printToFileAsync({
         html: htmlContent,
       });
 
-      console.log("PDF generated with Expo Print at:", uri);
+      console.warn('PDF generated with Expo Print at:', uri);
 
       if (!(await Sharing.isAvailableAsync())) {
-        Alert.alert("Error", "Sharing is not available on this device.");
+        Alert.alert('Error', 'Sharing is not available on this device.');
         return;
       }
 
       await Sharing.shareAsync(uri, {
-        mimeType: "application/pdf",
-        dialogTitle: "Share your blood pressure log",
+        mimeType: 'application/pdf',
+        dialogTitle: 'Share your blood pressure log',
       });
     } catch (error) {
-      console.error("Error during PDF export:", error);
-      Alert.alert("Error", "An error occurred while exporting the PDF.");
+      console.error('Error during PDF export:', error);
+      Alert.alert('Error', 'An error occurred while exporting the PDF.');
     }
   }, []);
   return {
