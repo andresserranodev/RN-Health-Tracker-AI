@@ -1,5 +1,6 @@
-import {colors} from '@shared/theme';
 import {StyleSheet, Dimensions} from 'react-native';
+
+import {colors} from '@shared/theme';
 
 const {width} = Dimensions.get('window');
 

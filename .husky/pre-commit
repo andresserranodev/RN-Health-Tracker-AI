@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# Navigate to HealthTracker directory and run linting
+echo "🔍 Running linting checks..."
+cd HealthTracker || exit 1
+
+npm run lint
+
+# Check if linting passed
+if [ $? -ne 0 ]; then
+    echo ""
+    echo "❌ Linting failed! Please fix the issues before committing."
+    echo ""
+    echo "Common fixes:"
+    echo "  - Remove unused imports and variables"
+    echo "  - Replace console.log() with console.warn() or console.error()"
+    echo "  - Move inline styles to StyleSheet objects"
+    echo "  - Fix TypeScript type issues (avoid 'any')"
+    echo "  - Follow React hooks rules"
+    echo ""
+    echo "Run 'npm run lint:fix' to auto-fix some issues."
+    exit 1
+fi
+
+echo "✅ All linting checks passed!"
+exit 0
