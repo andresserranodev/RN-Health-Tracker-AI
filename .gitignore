@@ -38,3 +38,9 @@ yarn-error.*
 
 HealthTracker/.env
 .DS_Store
+
+# Agent ephemeral files
+.claude/
+.agent/
+CLAUDE.md
+ANTIGRAVITY.md
