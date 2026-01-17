@@ -428,7 +428,50 @@ This ensures that all code in the repository meets our quality standards!
 
 ---
 
+## 🤖 AI Agent Configuration (DRY Strategy)
+
+This project uses a **Single Source of Truth (SSOT)** strategy to manage configurations for different AI agents (Claude and Antigravity) while keeping the rules synchronized.
+
+### 📂 Configuration Structure
+
+The core configuration lives in the hidden `.agent-config/` directory:
+
+- **`.agent-config/PROJECT_GUIDELINES.md`**: The master file containing all project rules, architecture details, and coding standards.
+- **`.agent-config/skills/`**: Shared AI skills (e.g., unit testing guidelines).
+
+### 🔄 Switching Agents
+
+We use a custom script to toggle between agent environments. This script copies the settings from `.agent-config/` to the specific files each agent expects.
+
+#### Available Commands
+
+To set up **Claude Code**:
+```bash
+./scripts/switch-agent.sh claude
+```
+
+To set up **Antigravity**:
+```bash
+./scripts/switch-agent.sh antigravity
+```
+
+To set up **Both** simultaneously:
+```bash
+./scripts/switch-agent.sh all
+```
+
+### 🛡️ Git Strategy
+
+- **Source of Truth**: Only `.agent-config/` and `scripts/` are tracked in Git.
+- **Ignored Files**: The generated files (`CLAUDE.md`, `ANTIGRAVITY.md`, `.claude/`, and `.agent/`) are included in `.gitignore` to avoid redundant commits.
+
+### 💡 Best Practice
+**Always edit files inside `.agent-config/`.** Any changes made directly to `CLAUDE.md` or `ANTIGRAVITY.md` will be overwritten the next time you run the switch script.
+
+---
+
 ## 📚 [WIP] Sources:
+
 
 ## 🤝 Contributions
 
