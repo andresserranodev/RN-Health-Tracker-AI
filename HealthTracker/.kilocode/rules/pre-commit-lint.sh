@@ -5,11 +5,8 @@
 
 echo "🔍 Running linting checks..."
 
-# Run ESLint
-npm run lint
-
-# Check if linting passed
-if [ $? -ne 0 ]; then
+# Run ESLint and check if it passed
+if ! npm run lint; then
     echo "❌ Linting failed! Please fix the issues before committing."
     echo ""
     echo "Common fixes:"

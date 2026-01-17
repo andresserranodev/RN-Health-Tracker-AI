@@ -136,7 +136,7 @@ export default function CameraModal({
               style={styles.camera}
               facing={facing}
               ref={cameraRef}
-              ratio='4:3' // TODO Adjust ratio when needed using a crop tool
+              ratio='4:3'
             />
             <View style={styles.cameraControls}>
               <TouchableOpacity

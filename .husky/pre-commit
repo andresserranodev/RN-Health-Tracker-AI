@@ -4,10 +4,8 @@
 echo "🔍 Running linting checks..."
 cd HealthTracker || exit 1
 
-npm run lint
-
 # Check if linting passed
-if [ $? -ne 0 ]; then
+if ! npm run lint; then
     echo ""
     echo "❌ Linting failed! Please fix the issues before committing."
     echo ""
