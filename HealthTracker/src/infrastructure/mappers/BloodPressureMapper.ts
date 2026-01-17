@@ -28,7 +28,6 @@ export const readingToFormValues = (
   const ppmNum = Number(reading.pulse);
 
   if (isNaN(sysNum) || isNaN(diaNum) || isNaN(ppmNum)) {
-    console.warn('Invalid data found while mapping to form values:', reading);
     return null;
   }
 

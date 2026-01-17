@@ -125,6 +125,43 @@ module.exports = [
       },
     },
   },
+  // Test files configuration
+  {
+    files: ['**/*.test.{js,jsx,ts,tsx}', '**/*.spec.{js,jsx,ts,tsx}'],
+    languageOptions: {
+      parser: typescriptParser,
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+        ecmaVersion: 2020,
+        sourceType: 'module',
+      },
+      globals: {
+        __DEV__: 'readonly',
+        console: 'readonly',
+        global: 'readonly',
+        process: 'readonly',
+        require: 'readonly',
+        module: 'readonly',
+        exports: 'readonly',
+        // Jest globals
+        jest: 'readonly',
+        describe: 'readonly',
+        it: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+      },
+    },
+    rules: {
+      'no-console': 'off', // Allow console in tests
+      'react-native/no-raw-text': 'off', // Allow raw text in tests
+    },
+  },
   {
     ignores: [
       'node_modules/',
