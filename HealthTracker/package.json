@@ -11,7 +11,8 @@
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "prepare": "husky"
+    "prepare": "husky",
+    "reactotron": "adb reverse tcp:9090 tcp:9090 && /opt/Reactotron/reactotron-app"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^5.1.8",
@@ -41,6 +42,7 @@
     "@types/react": "~19.0.10",
     "@typescript-eslint/eslint-plugin": "^8.53.0",
     "@typescript-eslint/parser": "^8.53.0",
+    "babel-plugin-module-resolver": "^5.0.2",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
