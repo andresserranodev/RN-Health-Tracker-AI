@@ -1,6 +1,13 @@
 # RN-Health-Tracker-AI
 
+<div align="center">
+
 [![CI](https://github.com/andresserranodev/RN-Health-Tracker-AI/actions/workflows/ci.yml/badge.svg)](https://github.com/andresserranodev/RN-Health-Tracker-AI/actions/workflows/ci.yml)
+[![CodeFactor](https://www.codefactor.io/repository/github/andresserranodev/rn-health-tracker-ai/badge)](https://www.codefactor.io/repository/github/andresserranodev/rn-health-tracker-ai)
+[![codecov](https://codecov.io/gh/andresserranodev/RN-Health-Tracker-AI/graph/badge.svg?token=AZZCK775VT)](https://codecov.io/gh/andresserranodev/RN-Health-Tracker-AI)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/withastro/astro/blob/main/LICENSE)
+
+</div>
 
 # Presure Health Tracker
 
@@ -113,16 +120,19 @@ Shared (Constants + Templates)
 ### 📋 Key Files
 
 **Domain Layer:**
+
 - `domain/entities/BloodPressureReading.ts` - Core domain entity
 - `domain/use-cases/saveBloodPressure.ts` - Save reading logic
 - `domain/use-cases/extractReadingsFromImage.ts` - AI extraction logic
 
 **Infrastructure Layer:**
+
 - `infrastructure/di/Container.ts` - Dependency injection container
 - `infrastructure/repositories/InMemoryBloodPressureRepository.ts` - Data storage
 - `infrastructure/api/geminiService.ts` - Gemini AI integration
 
 **Presentation Layer:**
+
 - `presentation/hooks/useBloodPressureData.ts` - State management
 - `presentation/hooks/useCameraHandler.ts` - Camera + AI workflow
 - `presentation/screens/HomeScreen.tsx` - Main screen
@@ -448,16 +458,19 @@ We use a custom script to toggle between agent environments. This script copies 
 #### Available Commands
 
 To set up **Claude Code**:
+
 ```bash
 ./scripts/switch-agent.sh claude
 ```
 
 To set up **Antigravity**:
+
 ```bash
 ./scripts/switch-agent.sh antigravity
 ```
 
 To set up **Both** simultaneously:
+
 ```bash
 ./scripts/switch-agent.sh all
 ```
@@ -468,12 +481,12 @@ To set up **Both** simultaneously:
 - **Ignored Files**: The generated files (`CLAUDE.md`, `ANTIGRAVITY.md`, `.claude/`, and `.agent/`) are included in `.gitignore` to avoid redundant commits.
 
 ### 💡 Best Practice
+
 **Always edit files inside `.agent-config/`.** Any changes made directly to `CLAUDE.md` or `ANTIGRAVITY.md` will be overwritten the next time you run the switch script.
 
 ---
 
 ## 📚 [WIP] Sources:
-
 
 ## 🤝 Contributions
 
