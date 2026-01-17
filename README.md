@@ -21,6 +21,110 @@ This application was developed with two primary goals in mind:
 1.  **To learn and practice React Native:** It serves as a hands-on project to build skills in cross-platform mobile application development.
 2.  **To test the Gemini API:** Specifically, this project explores the capabilities of the [**Gemini Image Understanding API**](https://ai.google.dev/gemini-api/docs/image-understanding). The goal is to experiment with integrating this AI model for innovative health-related features, such as analyzing images of meals or medical readings.
 
+## ⚙️ App Workflow
+
+```mermaid
+flowchart TD
+    Start((Start)) --> Open[Open Camera]
+    Open --> Base64[Process Photo to Base64]
+    Base64 --> Gemini[Call Gemini API Prompt + Base64]
+    Gemini --> JSON[Process JSON Response]
+    JSON --> Form[Show Data in a Form]
+    Form --> Save[Save Data on Button Tap]
+    Save --> FinalEnd((End))
+
+    subgraph Phase1 [Phase 1: Capture]
+        Start
+        Open
+        Base64
+        Gemini
+    end
+
+    subgraph Phase2 [Phase 2: Response]
+        JSON
+        Form
+        Save
+        FinalEnd
+    end
+
+    classDef purple fill:#6b3fa0,stroke:#320a5c,color:#fff,stroke-width:2px;
+    classDef yellow fill:#f1c40f,stroke:#9a7d0a,color:#000,stroke-width:2px;
+    classDef blue fill:#2980b9,stroke:#154360,color:#fff,stroke-width:2px;
+    classDef teal fill:#16a085,stroke:#0b5345,color:#fff,stroke-width:2px;
+    classDef red fill:#c0392b,stroke:#641e16,color:#fff,stroke-width:2px;
+
+    class Start purple;
+    class Open yellow;
+    class Base64,JSON blue;
+    class Gemini,Save teal;
+    class FinalEnd red;
+```
+
+## 🏗️ Project Architecture
+
+This project follows **Clean Architecture** principles with clear separation of concerns across four main layers:
+
+### 📂 Directory Structure
+
+```
+HealthTracker/src/
+├── domain/                 # Business logic layer (framework-agnostic)
+│   ├── entities/          # Domain models and value objects
+│   ├── repositories/      # Repository interfaces (contracts)
+│   └── use-cases/         # Business operations
+├── infrastructure/        # Technical implementations
+│   ├── api/              # External API integration (Gemini)
+│   ├── di/               # Dependency injection container
+│   ├── mappers/          # Data transformation
+│   ├── repositories/     # Repository implementations
+│   └── services/         # External services (Camera, Image)
+├── presentation/         # UI and presentation logic
+│   ├── components/       # Reusable UI components
+│   ├── hooks/           # Custom React hooks
+│   ├── navigation/      # App navigation
+│   └── screens/         # Screen components
+└── shared/              # Cross-cutting concerns
+    ├── constants/       # App-wide constants
+    └── templates/       # Shared templates (PDF)
+```
+
+### 🔄 Layer Dependencies
+
+```
+Presentation (UI + Hooks)
+    ↓ uses
+Domain (Entities + Use Cases + Interfaces)
+    ↓ implements
+Infrastructure (Repositories + API + Services)
+    ↓ uses
+Shared (Constants + Templates)
+```
+
+### 🎯 Key Design Patterns
+
+- **Repository Pattern**: Abstracts data access through interfaces
+- **Use Case Pattern**: Encapsulates business logic in single-responsibility functions
+- **Dependency Injection**: Central DI container manages dependencies
+- **Mapper Pattern**: Transforms data between architectural layers
+- **Custom Hooks**: Separates UI logic from presentation components
+
+### 📋 Key Files
+
+**Domain Layer:**
+- `domain/entities/BloodPressureReading.ts` - Core domain entity
+- `domain/use-cases/saveBloodPressure.ts` - Save reading logic
+- `domain/use-cases/extractReadingsFromImage.ts` - AI extraction logic
+
+**Infrastructure Layer:**
+- `infrastructure/di/Container.ts` - Dependency injection container
+- `infrastructure/repositories/InMemoryBloodPressureRepository.ts` - Data storage
+- `infrastructure/api/geminiService.ts` - Gemini AI integration
+
+**Presentation Layer:**
+- `presentation/hooks/useBloodPressureData.ts` - State management
+- `presentation/hooks/useCameraHandler.ts` - Camera + AI workflow
+- `presentation/screens/HomeScreen.tsx` - Main screen
+
 ## ✨ Key Features of the Board
 
 - **Custom Views:** Different ways to view your data for clearer analysis.
@@ -67,6 +171,7 @@ This application was developed with two primary goals in mind:
 ## ESLint and Prettier Setup
 
 ### Overview
+
 ESLint has been successfully integrated into the React Native Health Tracker project with comprehensive linting rules for TypeScript, React, and React Native development.
 
 ### Installed Dependencies
@@ -88,11 +193,13 @@ The following ESLint-related packages were installed as devDependencies:
 ### Configuration Files
 
 #### eslint.config.js
+
 - Uses ESLint v9 flat configuration format
 - Configured for TypeScript, React, and React Native
 - Includes comprehensive rule sets for code quality and consistency
 
 #### .prettierrc.js
+
 - Prettier configuration for consistent code formatting
 - Configured with single quotes, trailing commas, and other formatting preferences
 
@@ -112,6 +219,7 @@ The following scripts have been added to package.json:
 ### Usage
 
 #### Linting
+
 ```bash
 # Check for linting issues
 npm run lint
@@ -121,6 +229,7 @@ npm run lint:fix
 ```
 
 #### Formatting
+
 ```bash
 # Format all files
 npm run format
@@ -132,27 +241,32 @@ npm run format:check
 ### Key Rules Enabled
 
 #### TypeScript Rules
+
 - No unused variables (with underscore prefix exception)
 - No explicit `any` types (warning)
 - Prefer const over let/var
 
 #### React Rules
+
 - React in JSX scope not required (React 17+)
 - No prop-types (using TypeScript)
 - Hooks rules enforcement
 
 #### React Native Rules
+
 - No unused styles
 - No inline styles (warning)
 - No color literals (warning)
 - No raw text outside Text components
 
 #### Import Rules
+
 - Organized import order
 - Alphabetical sorting within groups
 - Newlines between import groups
 
 #### Code Quality Rules
+
 - No console statements (warning)
 - No debugger statements
 - Prefer template literals
@@ -163,6 +277,7 @@ npm run format:check
 ✅ ESLint is successfully installed and configured
 ✅ Auto-fix resolved most formatting issues (500 → 95 problems)
 ✅ Remaining issues are mostly warnings about:
+
 - Color literals in styles (React Native best practice warnings)
 - Console statements (development warnings)
 - Import resolver configuration (expected in React Native projects)
@@ -195,23 +310,27 @@ Husky is now configured to automatically run linting checks before every commit,
 ### What's Configured
 
 #### 1. Husky Installation
+
 - **Package**: `husky` installed as dev dependency in [`HealthTracker/package.json`](HealthTracker/package.json)
 - **Prepare Script**: `"prepare": "husky"` ensures Husky is set up when dependencies are installed
 
 #### 2. Pre-commit Hook
+
 - **Location**: [`HealthTracker/.husky/pre-commit`](HealthTracker/.husky/pre-commit)
 - **Action**: Runs our custom linting script before every commit
 - **Script**: Executes [`HealthTracker/.kilocode/rules/pre-commit-lint.sh`](HealthTracker/.kilocode/rules/pre-commit-lint.sh)
 
 #### 3. Linting Script
+
 - **Purpose**: Runs `npm run lint` and provides helpful feedback
-- **Behavior**: 
+- **Behavior**:
   - ✅ **Pass**: Allows commit if no linting errors (warnings are OK)
   - ❌ **Fail**: Blocks commit and shows helpful error messages
 
 ### How It Works
 
 #### Automatic Execution
+
 ```bash
 git commit -m "Add new feature"
 # ↓ Husky automatically triggers
@@ -222,6 +341,7 @@ git commit -m "Add new feature"
 ```
 
 #### Manual Testing
+
 ```bash
 # Test the pre-commit hook manually
 ./.husky/pre-commit
@@ -244,30 +364,36 @@ npm install
 ### Benefits
 
 #### 🛡️ **Quality Gate**
+
 - No commits with linting errors
 - Maintains consistent code quality
 
 #### 🚀 **Automatic**
+
 - No manual checking required
 - Works for all team members
 
 #### 📚 **Educational**
+
 - Provides helpful error messages
 - Suggests specific fixes
 
 #### ⚡ **Fast Feedback**
+
 - Catches issues immediately
 - Prevents broken code in repository
 
 ### Troubleshooting
 
 #### Hook Not Running
+
 ```bash
 # Reinstall Husky hooks
 npm run prepare
 ```
 
 #### Permission Issues
+
 ```bash
 # Make hooks executable
 chmod +x .husky/pre-commit
@@ -275,6 +401,7 @@ chmod +x .kilocode/rules/pre-commit-lint.sh
 ```
 
 #### Bypass Hook (Emergency Only)
+
 ```bash
 # Skip pre-commit hooks (NOT RECOMMENDED)
 git commit -m "Emergency fix" --no-verify

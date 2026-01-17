@@ -37,3 +37,4 @@ yarn-error.*
 *.tsbuildinfo
 
 HealthTracker/.env
+.DS_Store
