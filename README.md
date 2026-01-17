@@ -1,5 +1,7 @@
 # RN-Health-Tracker-AI
 
+[![CI](https://github.com/andresserranodev/RN-Health-Tracker-AI/actions/workflows/ci.yml/badge.svg)](https://github.com/andresserranodev/RN-Health-Tracker-AI/actions/workflows/ci.yml)
+
 # Presure Health Tracker
 
 Welcome to the **Presure Health Tracker**! This project is designed to help you monitor and manage your health in a simple and organized way.
