@@ -102,7 +102,7 @@ module.exports = [
       ],
 
       // General rules
-      'no-console': 'warn',
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-debugger': 'error',
       'no-unused-vars': 'off', // Using TypeScript version
       'prefer-const': 'error',

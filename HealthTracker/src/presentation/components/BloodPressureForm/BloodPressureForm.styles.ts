@@ -1,9 +1,10 @@
+import {colors} from '@shared/theme';
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   modalContent: {
     width: '100%',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     padding: 20,
     borderRadius: 10,
   },
@@ -15,7 +16,7 @@ export const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: colors.neutral[400],
     padding: 10,
     fontSize: 16,
     borderRadius: 6,
@@ -27,7 +28,7 @@ export const styles = StyleSheet.create({
     marginTop: 20,
   },
   errorText: {
-    color: 'red',
+    color: colors.error,
     fontSize: 12,
     marginBottom: 10,
     marginLeft: 5,

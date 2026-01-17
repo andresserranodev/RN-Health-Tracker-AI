@@ -1,3 +1,4 @@
+import {colors} from '@shared/theme';
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -9,11 +10,11 @@ export const styles = StyleSheet.create({
   },
   metricLabel: {
     fontSize: 16,
-    color: '#666',
+    color: colors.neutral[700],
   },
   metricValue: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#333',
+    color: colors.neutral[800],
   },
 });

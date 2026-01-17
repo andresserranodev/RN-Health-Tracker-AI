@@ -1,9 +1,10 @@
+import {colors} from '@shared/theme';
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: colors.neutral[100],
     alignItems: 'center',
     paddingTop: 20,
   },
@@ -17,18 +18,18 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: colors.overlay.light,
   },
   modalContent: {
     width: '90%',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     padding: 20,
     borderRadius: 10,
     elevation: 5,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: colors.neutral[400],
     padding: 10,
     fontSize: 16,
     borderRadius: 6,
@@ -63,12 +64,12 @@ export const styles = StyleSheet.create({
   lastRecordContainer: {
     width: '90%',
     padding: 10,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     borderRadius: 10,
     marginTop: 15,
     marginBottom: 15,
     elevation: 2,
-    shadowColor: '#000',
+    shadowColor: colors.shadow,
     shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.18,
     shadowRadius: 1.0,
@@ -76,18 +77,18 @@ export const styles = StyleSheet.create({
   placeholderContainer: {
     width: '90%',
     padding: 20,
-    backgroundColor: '#F7F7F7',
+    backgroundColor: colors.neutral[50],
     borderRadius: 10,
     borderStyle: 'dashed',
     borderWidth: 1,
-    borderColor: '#CCC',
+    borderColor: colors.neutral[500],
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 20,
   },
   placeholderText: {
     fontSize: 16,
-    color: '#666',
+    color: colors.neutral[700],
     textAlign: 'center',
     lineHeight: 24,
   },

@@ -1,3 +1,4 @@
+import {colors} from '@shared/theme';
 import {StyleSheet, Dimensions} from 'react-native';
 
 const {width} = Dimensions.get('window');
@@ -5,7 +6,7 @@ const {width} = Dimensions.get('window');
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: colors.black,
   },
   cameraContainer: {
     flex: 1,
@@ -19,14 +20,14 @@ export const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'transparent',
+    backgroundColor: colors.transparent,
     justifyContent: 'space-between',
   },
   closeButtonTop: {
     position: 'absolute',
     top: 50,
     right: 20,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: colors.overlay.light,
     borderRadius: 25,
     width: 50,
     height: 50,
@@ -44,10 +45,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 30,
     paddingBottom: 30,
-    backgroundColor: 'transparent',
+    backgroundColor: colors.transparent,
   },
   flipButton: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: colors.overlay.light,
     borderRadius: 30,
     width: 60,
     height: 60,
@@ -55,17 +56,17 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   captureButton: {
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     borderRadius: 40,
     width: 80,
     height: 80,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 4,
-    borderColor: 'rgba(255, 255, 255, 0.3)',
+    borderColor: colors.border.white,
   },
   captureButtonInner: {
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     borderRadius: 30,
     width: 60,
     height: 60,
@@ -76,7 +77,7 @@ export const styles = StyleSheet.create({
   },
   previewContainer: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: colors.black,
   },
   previewImage: {
     flex: 1,
@@ -94,7 +95,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 50,
   },
   retakeButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: colors.button.secondary,
     borderRadius: 25,
     paddingVertical: 15,
     paddingHorizontal: 20,
@@ -103,7 +104,7 @@ export const styles = StyleSheet.create({
     gap: 8,
   },
   saveButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: colors.primary,
     borderRadius: 25,
     paddingVertical: 15,
     paddingHorizontal: 20,
@@ -112,18 +113,18 @@ export const styles = StyleSheet.create({
     gap: 8,
   },
   buttonText: {
-    color: 'white',
+    color: colors.white,
     fontSize: 16,
     fontWeight: '600',
   },
   permissionContainer: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    backgroundColor: colors.overlay.dark,
     justifyContent: 'center',
     alignItems: 'center',
   },
   permissionContent: {
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     borderRadius: 20,
     padding: 30,
     margin: 20,
@@ -134,28 +135,28 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     marginBottom: 20,
-    color: '#333',
+    color: colors.neutral[800],
   },
   permissionButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: colors.primary,
     borderRadius: 10,
     paddingVertical: 15,
     paddingHorizontal: 30,
     marginBottom: 10,
   },
   permissionButtonText: {
-    color: 'white',
+    color: colors.white,
     fontSize: 16,
     fontWeight: '600',
   },
   closeButton: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: colors.neutral[200],
     borderRadius: 10,
     paddingVertical: 15,
     paddingHorizontal: 30,
   },
   closeButtonText: {
-    color: '#333',
+    color: colors.neutral[800],
     fontSize: 16,
     fontWeight: '600',
   },

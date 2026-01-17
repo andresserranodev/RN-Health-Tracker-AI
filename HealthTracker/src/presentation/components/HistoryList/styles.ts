@@ -1,3 +1,4 @@
+import {colors} from '@shared/theme';
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -11,34 +12,34 @@ export const styles = StyleSheet.create({
   },
   placeholderContainer: {
     padding: 20,
-    backgroundColor: '#F7F7F7',
+    backgroundColor: colors.neutral[50],
     borderRadius: 10,
     alignItems: 'center',
     marginTop: 10,
   },
   placeholderText: {
     fontSize: 16,
-    color: '#666',
+    color: colors.neutral[700],
     textAlign: 'center',
   },
   recordItem: {
     flexDirection: 'row', // Arrange items in a row
     alignItems: 'center', // Center items vertically
     gap: 15,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     paddingHorizontal: 20,
     paddingVertical: 15,
     marginVertical: 5,
     borderRadius: 10,
     elevation: 2,
-    shadowColor: '#000',
+    shadowColor: colors.shadow,
     shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.1,
     shadowRadius: 1.5,
   },
   recordDate: {
     fontSize: 10,
-    color: '#888',
+    color: colors.neutral[600],
     marginTop: 10,
     textAlign: 'right',
   },

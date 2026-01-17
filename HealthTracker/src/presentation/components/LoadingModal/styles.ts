@@ -1,21 +1,22 @@
+import {colors} from '@shared/theme';
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    backgroundColor: colors.overlay.medium,
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 10,
   },
   container: {
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    backgroundColor: colors.overlay.dark,
     padding: 20,
     borderRadius: 10,
     alignItems: 'center',
   },
   text: {
-    color: 'white',
+    color: colors.white,
     marginTop: 15,
     fontSize: 16,
   },
