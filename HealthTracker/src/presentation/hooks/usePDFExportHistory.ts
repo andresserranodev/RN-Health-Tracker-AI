@@ -3,7 +3,7 @@ import * as Sharing from 'expo-sharing';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';
 
-import {BloodPressureReading} from '.././../../domain/models/bloodPressureReading';
+import {BloodPressureReading} from '@domain/entities/BloodPressureReading';
 
 export const usePDFExportHistory = () => {
   const exportRecord = useCallback(async (records: BloodPressureReading[]) => {

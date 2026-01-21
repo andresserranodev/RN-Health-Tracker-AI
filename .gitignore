@@ -36,6 +36,9 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
+# test coverage
+coverage/
+
 HealthTracker/.env
 .DS_Store
 

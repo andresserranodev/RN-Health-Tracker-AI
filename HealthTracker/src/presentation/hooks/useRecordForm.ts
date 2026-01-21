@@ -1,6 +1,6 @@
 import {useState, useCallback} from 'react';
 
-import {BloodPressureFormValues} from '../../BloodPressureForm/types';
+import {BloodPressureFormValues} from '@domain/entities/BloodPressureFormValues';
 /**
  * @description Custom hook to manage the state and actions for the blood pressure form modal.
  * It encapsulates the logic for modal visibility, pre-filled data, and form event handlers.

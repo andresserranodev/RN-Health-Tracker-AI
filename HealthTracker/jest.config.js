@@ -15,7 +15,9 @@ module.exports = {
     'src/**/*.{ts,tsx}',
     '!src/**/*.d.ts',
     '!src/**/*.styles.ts',
+    '!src/**/styles.ts',
     '!src/**/index.ts',
+    '!src/shared/**',
   ],
   testEnvironment: 'node',
 };
