@@ -1,10 +1,11 @@
 import {Feather} from '@expo/vector-icons';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
+import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {StatusBar} from 'expo-status-bar';
-import React from 'react';
-import {View, Text, Modal, TouchableOpacity, SafeAreaView} from 'react-native';
+import React, {useRef, useEffect} from 'react';
+import {View, Text, SafeAreaView} from 'react-native';
 
-import BloodPressureForm from '@presentation/components/BloodPressureForm/BloodPressureForm';
+import BloodPressureBottomSheet from '@presentation/components/BloodPressureBottomSheet';
 import CameraModal from '@presentation/components/CameraModal';
 import HistoryList from '@presentation/components/HistoryList';
 import IconButton from '@presentation/components/IconButton';
@@ -27,8 +28,17 @@ export default function App() {
   const {exportRecord} = usePDFExportHistory();
 
   // Custom hooks for form handling
+  const bottomSheetRef = useRef<BottomSheetModal>(null);
   const {isModalVisible, prefilledData, openForm, closeForm, handleFormSubmit} =
     useRecordForm(addBloodPressureReading);
+
+  useEffect(() => {
+    if (isModalVisible) {
+      bottomSheetRef.current?.present();
+    } else {
+      bottomSheetRef.current?.dismiss();
+    }
+  }, [isModalVisible]);
   // Custom hook for camera handling
   const {
     isCameraVisible,
@@ -88,24 +98,12 @@ export default function App() {
         />
       </View>
 
-      <Modal
-        visible={isModalVisible}
-        transparent={true}
-        animationType='slide'
-        onRequestClose={closeForm}>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <TouchableOpacity style={styles.closeButton} onPress={closeForm}>
-              <Feather name='x' size={24} color='black' />
-            </TouchableOpacity>
-            <BloodPressureForm
-              initialValues={prefilledData}
-              onSubmit={handleFormSubmit}
-              onClose={closeForm}
-            />
-          </View>
-        </View>
-      </Modal>
+      <BloodPressureBottomSheet
+        ref={bottomSheetRef}
+        initialValues={prefilledData}
+        onSubmit={handleFormSubmit}
+        onClose={closeForm}
+      />
       <CameraModal
         visible={isCameraVisible}
         onClose={closeCamera}

@@ -47,3 +47,4 @@ HealthTracker/.env
 .agent/
 CLAUDE.md
 ANTIGRAVITY.md
+.kilocode/mcp.json

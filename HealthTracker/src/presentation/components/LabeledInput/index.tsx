@@ -1,6 +1,7 @@
+import {BottomSheetTextInput} from '@gorhom/bottom-sheet';
 import React from 'react';
 import {FieldError} from 'react-hook-form';
-import {View, Text, TextInput, TextInputProps} from 'react-native';
+import {View, Text, TextInputProps} from 'react-native';
 
 import {styles} from './styles';
 
@@ -13,7 +14,7 @@ const LabeledInput = ({label, error, ...textInputProps}: LabeledInputProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      <TextInput
+      <BottomSheetTextInput
         style={[styles.input, error && styles.inputError]}
         placeholderTextColor='#999'
         {...textInputProps}
