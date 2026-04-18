@@ -1,10 +1,11 @@
+import {BottomSheetView} from '@gorhom/bottom-sheet';
 import {yupResolver} from '@hookform/resolvers/yup';
 import React, {useEffect} from 'react';
 import {useForm, Controller} from 'react-hook-form';
 import {View, Text, Button} from 'react-native';
 
 import {BloodPressureFormValues} from '@domain/entities/BloodPressureFormValues';
-import LabeledInput from '@presentation/components/LabeledInput';
+import BottomSheetLabeledInput from '@presentation/components/BottomSheetLabeledInput';
 
 import {styles} from './BloodPressureForm.styles';
 import {validationSchema} from './validationSchema';
@@ -40,13 +41,13 @@ export default function BloodPressureForm({
   }, [initialValues, reset]);
 
   return (
-    <View style={styles.modalContent}>
+    <BottomSheetView style={styles.modalContent}>
       <Text style={styles.formTitle}>Add new register</Text>
       <Controller
         control={control}
         name='sys'
         render={({field: {onChange, onBlur, value}}) => (
-          <LabeledInput
+          <BottomSheetLabeledInput
             label='Systolic (SYS)'
             onBlur={onBlur}
             onChangeText={onChange}
@@ -61,7 +62,7 @@ export default function BloodPressureForm({
         control={control}
         name='dia'
         render={({field: {onChange, onBlur, value}}) => (
-          <LabeledInput
+          <BottomSheetLabeledInput
             label='Diastolic (DIA)'
             onBlur={onBlur}
             onChangeText={onChange}
@@ -76,7 +77,7 @@ export default function BloodPressureForm({
         control={control}
         name='ppm'
         render={({field: {onChange, onBlur, value}}) => (
-          <LabeledInput
+          <BottomSheetLabeledInput
             label='Pulse (PPM)'
             onBlur={onBlur}
             onChangeText={onChange}
@@ -91,6 +92,6 @@ export default function BloodPressureForm({
         <Button title='Close' onPress={onClose} />
         <Button title='Save' onPress={handleSubmit(onSubmit)} />
       </View>
-    </View>
+    </BottomSheetView>
   );
 }

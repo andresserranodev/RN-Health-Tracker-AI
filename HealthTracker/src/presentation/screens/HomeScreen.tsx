@@ -1,8 +1,13 @@
 import {Feather} from '@expo/vector-icons';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
+import {
+  BottomSheetModal,
+  BottomSheetBackdrop,
+  BottomSheetBackdropProps,
+} from '@gorhom/bottom-sheet';
 import {StatusBar} from 'expo-status-bar';
-import React from 'react';
-import {View, Text, Modal, TouchableOpacity, SafeAreaView} from 'react-native';
+import React, {useRef, useEffect, useCallback} from 'react';
+import {View, Text, SafeAreaView} from 'react-native';
 
 import BloodPressureForm from '@presentation/components/BloodPressureForm/BloodPressureForm';
 import CameraModal from '@presentation/components/CameraModal';
@@ -37,6 +42,38 @@ export default function App() {
     closeCamera,
     handlePhotoTaken,
   } = useCameraHandler(openForm);
+
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  useEffect(() => {
+    if (isModalVisible) {
+      bottomSheetModalRef.current?.present();
+    } else {
+      bottomSheetModalRef.current?.dismiss();
+    }
+  }, [isModalVisible]);
+
+  const handleSheetChanges = useCallback(
+    (index: number) => {
+      if (index === -1 && isModalVisible) {
+        closeForm();
+      }
+    },
+    [closeForm, isModalVisible],
+  );
+
+  const renderBackdrop = useCallback(
+    (props: BottomSheetBackdropProps) => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={-1}
+        appearsOnIndex={0}
+        pressBehavior='close'
+        opacity={0.5}
+      />
+    ),
+    [],
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -88,24 +125,18 @@ export default function App() {
         />
       </View>
 
-      <Modal
-        visible={isModalVisible}
-        transparent={true}
-        animationType='slide'
-        onRequestClose={closeForm}>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <TouchableOpacity style={styles.closeButton} onPress={closeForm}>
-              <Feather name='x' size={24} color='black' />
-            </TouchableOpacity>
-            <BloodPressureForm
-              initialValues={prefilledData}
-              onSubmit={handleFormSubmit}
-              onClose={closeForm}
-            />
-          </View>
-        </View>
-      </Modal>
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        snapPoints={['50%']}
+        onChange={handleSheetChanges}
+        keyboardBehavior='interactive'
+        backdropComponent={renderBackdrop}>
+        <BloodPressureForm
+          initialValues={prefilledData}
+          onSubmit={handleFormSubmit}
+          onClose={closeForm}
+        />
+      </BottomSheetModal>
       <CameraModal
         visible={isCameraVisible}
         onClose={closeCamera}
